@@ -1,0 +1,27 @@
+$background-color: #000000;
+
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+}
+
+.game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    
+    background-color: $background-color;
+    padding: 20px;
+}
+
+canvas {
+    display: block;
+    background-color: $background-color;
+}
