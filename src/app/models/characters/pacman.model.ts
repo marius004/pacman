@@ -1,15 +1,16 @@
-import {Character} from "./character.model";
-import {MOVE_INTERVAL} from "./constants";
+import {Character, MOVE_INTERVAL} from './character';
+import {GameMap} from '@models/map/game-map';
 
 export class Pacman extends Character {
-  hasMoved: boolean = false;
+  moved: boolean = false;
   angle: number = 0;
 
-  onFirstMove?: () => void;
+  constructor(gameMap: GameMap, x: number, y: number, cellSize: number) {
+    super(gameMap, x, y, cellSize);
+  }
 
-  constructor(x: number, y: number, cellSize: number, onFirstMove?: () => void) {
-    super(x, y, cellSize);
-    this.onFirstMove = onFirstMove;
+  get hasMoved(): boolean {
+    return this.moved;
   }
 
   update(currentTime: number): void {
@@ -19,22 +20,20 @@ export class Pacman extends Character {
     const nextY = this.gridY + this.nextDirection.y;
 
     if (this.isValidPosition(nextX, nextY)) {
-      this.direction = { ...this.nextDirection};
+      this.direction = {...this.nextDirection};
     }
 
     const newX = this.gridX + this.direction.x;
     const newY = this.gridY + this.direction.y;
 
     if (this.isValidPosition(newX, newY)) {
-      this.gridX = newX;
-      this.gridY = newY;
       this.lastMoveTime = currentTime;
 
-      if (!this.hasMoved && (this.direction.x !== 0 || this.direction.y !== 0)) {
-        this.hasMoved = true;
-        if (this.onFirstMove) {
-          this.onFirstMove();
-        }
+      this.gridX = newX;
+      this.gridY = newY;
+
+      if (!this.moved && (this.direction.x !== 0 || this.direction.y !== 0)) {
+        this.moved = true;
       }
     }
   
@@ -42,8 +41,6 @@ export class Pacman extends Character {
     else if (this.direction.x === -1) this.angle = Math.PI;
     else if (this.direction.y === 1) this.angle = Math.PI/2;
     else if (this.direction.y === -1) this.angle = -Math.PI/2;
-
-    this.handleWraparound();
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

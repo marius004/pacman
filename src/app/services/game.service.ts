@@ -20,7 +20,6 @@ export class GameService {
   }
 
   resetGame() {
-    this.scoreSubject.next(0);
-    this.gameOverSubject.next(false);
+    window.location.reload();
   }
 }

@@ -1,9 +1,0 @@
-<div class="modal-backdrop">
-  <div class="modal" (click)="$event.stopPropagation()">
-    <h2>Game Over!</h2>
-    <ng-container *ngIf="score$ | async as score">
-      <p>Final Score: {{ score }}</p>
-    </ng-container>
-    <button (click)="restartGame()">Play Again</button>
-  </div>
-</div>

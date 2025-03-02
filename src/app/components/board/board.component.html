@@ -1,0 +1,15 @@
+<div class="game-container">
+  <div *ngIf="score$ | async as score" class="score">Score: {{ score }}</div>
+  
+  <canvas #gameCanvas></canvas>
+  
+  <ng-container *ngIf="gameOver$ | async">
+    <div class="modal-backdrop">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <h2>Game Over!</h2>
+        <p *ngIf="score$ | async as score">Final Score: {{score}}</p>
+        <button (click)="restartGame()">Play Again</button>
+      </div>
+    </div>
+  </ng-container>
+</div>

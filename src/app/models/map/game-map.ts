@@ -1,8 +1,10 @@
-import {CellType} from "./cell.model";
-import {Dot} from "./interfaces";
+import { Character } from '@models/characters/character';
+import {CellType} from './cell-type';
+import {Dot} from '../interfaces';
 
 export class GameMap {
     private grid: CellType[][];
+    
     
     constructor(mapData: number[][]) {
         this.grid = mapData.map(row => row.map(cell => cell as CellType));
@@ -16,8 +18,14 @@ export class GameMap {
         if (this.isValidPosition(x, y)) this.grid[y][x] = type;
     }
     
-    isWalkable(x: number, y: number): boolean {
-        return (this.getCell(x, y) ?? CellType.Wall) !== CellType.Wall;
+    isWalkable(character: Character, x: number, y: number): boolean {
+        const cell = this.getCell(x, y) ?? CellType.Wall; 
+
+        if (cell === CellType.Door) {
+            return character.canPassDoor();
+        }
+
+        return cell !== CellType.Wall;
     }
     
     private isValidPosition(x: number, y: number): boolean {
@@ -39,11 +47,22 @@ export class GameMap {
             .map(({x, y, cell}) => ({gridX: x, gridY: y, type: cell}));
     }
     
-    get walls(): { gridX: number, gridY: number }[] {
+    get walls(): {gridX: number, gridY: number}[] {
         return this.grid
             .flatMap((row, y) => row.map((cell, x) => ({cell, x, y})))
             .filter(({cell}) => cell === CellType.Wall)
             .map(({x, y}) => ({gridX: x, gridY: y}));
+    }
+
+    get door(): {gridX: number, gridY: number} | null {
+        for (let y = 0; y < this.grid.length; y++) {
+            for (let x = 0; x < this.grid[y].length; x++) {
+                if (this.grid[y][x] === CellType.Door) {
+                    return {gridX: x, gridY: y};
+                }
+            }
+        }
+        return null;
     }
     
     drawWalls(ctx: CanvasRenderingContext2D, cellSize: number): void {
@@ -76,5 +95,21 @@ export class GameMap {
             ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fill();
         });
+    }
+
+    drawDoor(ctx: CanvasRenderingContext2D, cellSize: number): void {
+        const door = this.door;
+        if (door) {
+            ctx.fillStyle = '#FF69B4';
+            const doorWidth = cellSize;
+            const doorHeight = cellSize / 5;
+            const offsetX = (cellSize - doorWidth) / 2;
+            ctx.fillRect(
+                door.gridX * cellSize + offsetX,
+                door.gridY * cellSize,
+                doorWidth,
+                doorHeight
+            );
+        }
     }
 }

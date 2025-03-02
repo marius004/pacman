@@ -1,7 +1,20 @@
-import {GAME_MAP, ANIMATION_SPEED, GRID_WIDTH, GRID_HEIGHT} from './constants';
-import {Direction} from "./interfaces";
+import {GameMap} from '@models/map/game-map';
+import {Direction} from '@models/interfaces';
+import { inject } from '@angular/core';
+import { GameService } from '@services/game.service';
+import { Observable } from 'rxjs';
+
+export const ANIMATION_SPEED = 0.2;
+export const MOVE_INTERVAL = 200;
+
+export const POSSIBLE_DIRECTIONS: readonly Direction[] = [
+    {x: 1, y: 0}, {x: -1, y: 0},
+    {x: 0, y: 1}, {x: 0, y: -1}
+];
 
 export abstract class Character {
+    private isGameOver = false;
+
     gridX: number;
     gridY: number;
     
@@ -10,19 +23,24 @@ export abstract class Character {
     
     direction: Direction;
     nextDirection: Direction;
+
     lastMoveTime: number;
-    isMoving: boolean;
     cellSize: number;
+    
+    gameMap: GameMap;
+    isMoving: boolean;
   
-    constructor(gridX: number, gridY: number, cellSize: number) {
+    constructor(gameMap: GameMap, gridX: number, gridY: number, cellSize: number) {
+        this.gameMap = gameMap;
+
         this.gridX = gridX;
         this.gridY = gridY;
         
         this.displayX = gridX * cellSize;
         this.displayY = gridY * cellSize;
         
-        this.direction = { x: 0, y: 0 };
-        this.nextDirection = { x: 0, y: 0 };
+        this.direction = {x: 0, y: 0};
+        this.nextDirection = {x: 0, y: 0};
         
         this.lastMoveTime = 0;
         this.isMoving = false;
@@ -30,6 +48,10 @@ export abstract class Character {
     }
   
     updatePosition(currentTime: number, moveInterval: number): boolean {
+        if(this.isGameOver) {
+            return false;
+        }
+        
         const targetX = this.gridX * this.cellSize;
         const targetY = this.gridY * this.cellSize;
     
@@ -44,19 +66,25 @@ export abstract class Character {
         }
         return true;
     }
-  
 
     isValidPosition(x: number, y: number): boolean {
-        return x >= 0 && y >= 0 && x < GAME_MAP.width && y < GAME_MAP.height && GAME_MAP.isWalkable(x, y);
-    }
-    
-    handleWraparound(): void {
-        if (this.gridX < 0) this.gridX = GRID_WIDTH - 1;
-        if (this.gridX >= GRID_WIDTH) this.gridX = 0;
-        if (this.gridY < 0) this.gridY = GRID_HEIGHT - 1;
-        if (this.gridY >= GRID_HEIGHT) this.gridY = 0;
+        return (
+            x >= 0 &&
+            y >= 0 &&
+            x < this.gameMap.width &&
+            y < this.gameMap.height &&
+            this.gameMap.isWalkable(this, x, y)
+        );
     }
 
-    abstract update(currentTime: number): void;
+    setGameOver() {
+        this.isGameOver = true;
+        this.nextDirection = {x: 0, y: 0};
+    }
+
+    canPassDoor(): boolean {
+        return false;
+    }
+    
     abstract draw(ctx: CanvasRenderingContext2D): void;
 }
