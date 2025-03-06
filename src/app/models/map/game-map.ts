@@ -5,7 +5,6 @@ import {Dot} from '../interfaces';
 export class GameMap {
     private grid: CellType[][];
     
-    
     constructor(mapData: number[][]) {
         this.grid = mapData.map(row => row.map(cell => cell as CellType));
     }

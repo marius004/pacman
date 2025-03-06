@@ -8,7 +8,7 @@ export class Inky extends Ghost {
         super(GhostType.INKY, x, y, gameMap, cellSize);
     }
 
-    protected updateDirection(gameState: GameState): Direction {
+    protected selectChaseDirection(gameState: GameState): Direction {
         const blinky = gameState.ghostPositions.find(ghost => ghost.type === GhostType.BLINKY);
         if (blinky) {
             const target = {

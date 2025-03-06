@@ -8,7 +8,7 @@ import {
   Input
 } from '@angular/core';
 
-import {Pacman} from '@models/characters/pacman.model';
+import {Pacman} from '@models/characters/pacman';
 import {Dot, Direction} from '@models/interfaces';
 import {Ghost} from '@models/characters/ghost';
 
@@ -151,12 +151,12 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     canvas.height = this.gameMap.height * this.cellSize;
   }
 
-  private checkCollisions(): void {
-    this.checkDotCollision();
-    this.checkGhostCollision();
+  private checkCollisions(currentTime: number): void {
+    this.checkDotCollision(currentTime);
+    this.checkGhostCollision(currentTime);
   }
 
-  private checkDotCollision(): void {
+  private checkDotCollision(currentTime: number): void {
     const pacmanPosition = {
       x: this.pacman.gridX,
       y: this.pacman.gridY
@@ -164,7 +164,13 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.dots = this.dots.filter(dot => {
       if (dot.gridX === pacmanPosition.x && dot.gridY === pacmanPosition.y) {
-        this.gameService.updateScore(dot.type === 0 ? 10 : 50);
+        if (dot.type === 0) {
+          this.gameService.updateScore(10);
+        } else {
+          this.gameService.updateScore(10);
+          this.ghosts.forEach(ghost => ghost.enterFrightenedState(currentTime));
+        }
+        
         this.gameMap.setCell(dot.gridX, dot.gridY, CellType.Empty);
         return false;
       }
@@ -172,24 +178,32 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     if (this.dots.length === 0) {
+      // todo: you won, restart the game with the current score
       this.gameService.gameOver();
     }
   }
 
-  private checkGhostCollision(): void {
-    const hasCollision = this.ghosts.some(ghost => {
-      const gridCollision = 
+  private checkGhostCollision(currentTime: number): void {
+    let ghostMultiplier = 1;
+    
+    this.ghosts.forEach(ghost => {
+      const gridCollision =
         Math.round(this.pacman.gridX) === Math.round(ghost.gridX) &&
         Math.round(this.pacman.gridY) === Math.round(ghost.gridY);
-
       const physicalCollision = this.checkPhysicalCollision(ghost);
-
-      return gridCollision || physicalCollision;
+      
+      if (gridCollision || physicalCollision) {
+        if (ghost.isFrightened()) {
+          this.gameService.updateScore(200 * ghostMultiplier);
+          // todo: score calculation is wrong
+          ghostMultiplier *= 2;
+          
+          ghost.onEaten(currentTime)
+        } else {
+          this.gameService.gameOver();
+        }
+      }
     });
-
-    if (hasCollision) {
-      this.gameService.gameOver();
-    }
   }
 
   private checkPhysicalCollision(ghost: Ghost): boolean {
@@ -200,10 +214,10 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     return distance < this.cellSize / 2;
   }
 
-  private render(): void {
+  private render(currentTime: number): void {
     this.clearCanvas();
     this.drawMaze();
-    this.drawEntities();
+    this.drawEntities(currentTime);
   }
 
   private clearCanvas(): void {
@@ -217,15 +231,15 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gameMap.drawDoor(this.ctx, this.cellSize);
   }
 
-  private drawEntities(): void {
-    this.pacman.draw(this.ctx);
-    this.ghosts.forEach(ghost => ghost.draw(this.ctx));
+  private drawEntities(currentTime: number): void {
+    this.pacman.draw(this.ctx, currentTime);
+    this.ghosts.forEach(ghost => ghost.draw(this.ctx, currentTime));
   }
 
   private startGameLoop(): void {
     const gameLoop = (currentTime: number) => {
       this.updateGameState(currentTime);
-      this.render();
+      this.render(currentTime);
       this.animationFrame = requestAnimationFrame(gameLoop);
     };
 
@@ -245,6 +259,6 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
         );
       }
     });
-    this.checkCollisions();
+    this.checkCollisions(currentTime);
   }
 }

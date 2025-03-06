@@ -8,7 +8,7 @@ export class Pinky extends Ghost {
         super(GhostType.PINKY, x, y, gameMap, cellSize);
     }
 
-    protected updateDirection(gameState: GameState): Direction {
+    protected selectChaseDirection(gameState: GameState): Direction {
         return this.getDirectionTowards({
             x: gameState.pacmanPosition.x + 4,
             y: gameState.pacmanPosition.y

@@ -1,8 +1,9 @@
 import {Character, POSSIBLE_DIRECTIONS, MOVE_INTERVAL} from './character';
 import {Direction, GameState} from '@models/interfaces';
+import {CellType} from '@models/map/cell-type';
 import {GameMap} from '@models/map/game-map';
+import {GhostState} from './ghost-state';
 import {GhostType} from './ghost-type';
-import { CellType } from '@models/map/cell-type';
 
 const GHOST_COLORS: Record<GhostType, string> = {
     [GhostType.BLINKY]: "#FF0000", // Blinky -> Red
@@ -11,22 +12,29 @@ const GHOST_COLORS: Record<GhostType, string> = {
     [GhostType.CLYDE]: "#FDCC08"   // Clyde  -> Orange
 };
 
-export abstract class Ghost extends Character {
-    private moveInterval: number;
-    protected exitedRoom = false;
+const SCATTER_CHASE_CYCLE = [7000, 20000, 7000, 20000, 5000, 20000, 5000, Infinity];
 
+export abstract class Ghost extends Character {
+    protected scatterTarget: Direction;
+
+    protected state = GhostState.SCATTER;
+    protected lastStateChange = 0;
+    protected exitedRoom = false;
+    protected cycleIndex = 0;
+    
     readonly type: GhostType;
 
     constructor(type: GhostType, x: number, y: number, gameMap: GameMap, cellSize: number) {
-        super(gameMap, x, y, cellSize);
-        
-        this.moveInterval = MOVE_INTERVAL * 1.3;
-        this.direction = this.getRandomDirection();
+        super(gameMap, x, y, cellSize, MOVE_INTERVAL * 1.3);
+
+        this.scatterTarget = this.getScatterTarget(type, gameMap);
         this.type = type;
     }
 
     update(currentTime: number, gameState: GameState): void {
-        if (!this.updatePosition(currentTime, this.moveInterval)) {
+        this.handleStateTransition(currentTime);
+
+        if (!this.updatePosition(currentTime)) {
             return;
         }
 
@@ -35,7 +43,18 @@ export abstract class Ghost extends Character {
             this.exitedRoom = nextCell !== CellType.GhostCell;
         }
 
-        this.direction = this.updateDirection(gameState);
+        switch (this.state) {
+            case GhostState.SCATTER:
+                this.direction = this.getDirectionTowards(this.scatterTarget);
+                break;
+            case GhostState.CHASE:
+                this.direction = this.selectChaseDirection(gameState);
+                break;
+            default:
+                this.direction = this.getValidRandomDirection();
+                break;
+        }
+
         if (!this.canMoveToNextPosition()) {
             this.direction = this.getValidRandomDirection();
         }
@@ -43,16 +62,48 @@ export abstract class Ghost extends Character {
         this.moveGhost(currentTime);
     }
 
-    draw(ctx: CanvasRenderingContext2D): void {
+    draw(ctx: CanvasRenderingContext2D, currentTime: number): void {
         ctx.save();
         ctx.translate(this.displayX + this.cellSize / 2, this.displayY + this.cellSize / 2);
         
-        this.drawBody(ctx);
+        this.drawBody(ctx, currentTime);
         this.drawEyes(ctx);
         this.drawPupils(ctx);
         
         ctx.restore();
     }
+
+    enterFrightenedState(currentTime: number): void {
+        this.state = GhostState.FRIGHTENED;
+        this.lastStateChange = currentTime;
+    }
+
+    onEaten(currentTime: number): void {
+        this.lastStateChange = currentTime;
+        this.state = GhostState.SCATTER;
+        this.exitedRoom = false;
+
+        this.gridX = 9;
+        this.gridY = 9;
+    }
+
+    isFrightened(): boolean {
+        return this.state == GhostState.FRIGHTENED;
+    }
+
+    override isValidPosition(x: number, y: number): boolean {
+        // todo: use A* instead...
+        if (!super.isValidPosition(x, y)) return false;
+    
+        const validMoves = POSSIBLE_DIRECTIONS.filter(({ x: dx, y: dy }) =>
+            super.isValidPosition(this.gridX + dx, this.gridY + dy)
+        );
+    
+        if (validMoves.length === 1) return true;
+    
+        const isOppositeDirection = x === this.gridX - this.direction.x && y === this.gridY - this.direction.y;
+        return !isOppositeDirection;
+    }    
 
     protected getDirectionTowards(target: Direction): Direction {
         return POSSIBLE_DIRECTIONS
@@ -85,7 +136,7 @@ export abstract class Ghost extends Character {
             : this.direction;
     }
 
-    protected abstract updateDirection(gameState: GameState): Direction;
+    protected abstract selectChaseDirection(gameState: GameState): Direction;
 
     private moveGhost(currentTime: number): void {
         const newX = this.gridX + this.direction.x;
@@ -99,10 +150,18 @@ export abstract class Ghost extends Character {
         }
     }
 
-    private drawBody(ctx: CanvasRenderingContext2D): void {
+    private drawBody(ctx: CanvasRenderingContext2D, currentTime: number): void {
+        let ghostColor = GHOST_COLORS[this.type];
+
+        if (this.state === GhostState.FRIGHTENED) {
+            const timeElapsed = currentTime - this.lastStateChange;    
+            const isFlashing = timeElapsed >= 4500 && Math.floor((timeElapsed / 200) % 2) === 0;
+            ghostColor = isFlashing ? "#fff3e0" : "#ff6f00";
+        }
+
         ctx.beginPath();
-        ctx.fillStyle = GHOST_COLORS[this.type];
-        
+        ctx.fillStyle = ghostColor;
+
         ctx.arc(0, -2, this.cellSize / 2 - 4, Math.PI, 0, false);
         
         ctx.rect(-this.cellSize / 2 + 4, -2, this.cellSize - 8, this.cellSize / 2 - 2);
@@ -127,5 +186,29 @@ export abstract class Ghost extends Character {
         ctx.arc(-5 + pupilX, -4 + pupilY, 2, 0, Math.PI * 2);
         ctx.arc(5 + pupilX, -4 + pupilY, 2, 0, Math.PI * 2);
         ctx.fill();
+    }
+
+    private handleStateTransition(currentTime: number): void {
+        const sinceLastChange = currentTime - this.lastStateChange;
+        if (this.state === GhostState.FRIGHTENED && sinceLastChange > 7000) {
+            this.state = GhostState.CHASE;
+        }
+
+        if (sinceLastChange > SCATTER_CHASE_CYCLE[this.cycleIndex]) {
+            this.state = this.state == GhostState.SCATTER ? GhostState.CHASE : GhostState.SCATTER;
+            this.cycleIndex = Math.min(this.cycleIndex + 1, SCATTER_CHASE_CYCLE.length - 1);
+            this.lastStateChange = currentTime;
+        }
+    }
+
+    private getScatterTarget(type: GhostType, gameMap: GameMap) {
+        const SCATTER_TARGETS: Record<GhostType, Direction> = {
+            [GhostType.INKY]: {x: gameMap.width, y: gameMap.height},
+            [GhostType.BLINKY]: {x: gameMap.width, y: 0},
+            [GhostType.CLYDE]: {x: 0, y: gameMap.height},
+            [GhostType.PINKY]: {x: 0, y: 0}
+        };
+
+        return SCATTER_TARGETS[type];
     }
 }

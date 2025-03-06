@@ -8,7 +8,7 @@ export class Blinky extends Ghost {
         super(GhostType.BLINKY, x, y, gameMap, cellSize);
     }
 
-    protected updateDirection(gameState: GameState): Direction {
+    protected selectChaseDirection(gameState: GameState): Direction {
         return this.getDirectionTowards(gameState.pacmanPosition);
     }
 }

@@ -8,7 +8,7 @@ export class Clyde extends Ghost {
         super(GhostType.CLYDE, x, y, gameMap, cellSize);
     }
 
-    protected updateDirection(gameState: GameState): Direction {
+    protected selectChaseDirection(gameState: GameState): Direction {
         const distanceToPacman = Math.sqrt(
             Math.pow(this.gridX - gameState.pacmanPosition.x, 2) + 
             Math.pow(this.gridY - gameState.pacmanPosition.y, 2)

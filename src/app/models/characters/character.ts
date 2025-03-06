@@ -1,11 +1,8 @@
 import {GameMap} from '@models/map/game-map';
 import {Direction} from '@models/interfaces';
-import { inject } from '@angular/core';
-import { GameService } from '@services/game.service';
-import { Observable } from 'rxjs';
 
-export const ANIMATION_SPEED = 0.2;
-export const MOVE_INTERVAL = 200;
+export const ANIMATION_SPEED = 0.1;
+export const MOVE_INTERVAL = 225;
 
 export const POSSIBLE_DIRECTIONS: readonly Direction[] = [
     {x: 1, y: 0}, {x: -1, y: 0},
@@ -14,6 +11,8 @@ export const POSSIBLE_DIRECTIONS: readonly Direction[] = [
 
 export abstract class Character {
     private isGameOver = false;
+
+    moveInterval: number;
 
     gridX: number;
     gridY: number;
@@ -29,8 +28,11 @@ export abstract class Character {
     
     gameMap: GameMap;
     isMoving: boolean;
-  
-    constructor(gameMap: GameMap, gridX: number, gridY: number, cellSize: number) {
+
+    constructor(gameMap: GameMap, gridX: number, gridY: number, cellSize: number, moveInterval: number) {
+        this.moveInterval = moveInterval;
+
+        this.cellSize = cellSize;
         this.gameMap = gameMap;
 
         this.gridX = gridX;
@@ -44,10 +46,9 @@ export abstract class Character {
         
         this.lastMoveTime = 0;
         this.isMoving = false;
-        this.cellSize = cellSize;
     }
   
-    updatePosition(currentTime: number, moveInterval: number): boolean {
+    updatePosition(currentTime: number): boolean {
         if(this.isGameOver) {
             return false;
         }
@@ -59,7 +60,7 @@ export abstract class Character {
                         Math.abs(this.displayY - targetY) > 0.1 ||
                         (this.direction.x !== 0 || this.direction.y !== 0);
   
-        if (currentTime - this.lastMoveTime < moveInterval) {
+        if (currentTime - this.lastMoveTime < this.moveInterval) {
             this.displayX += (targetX - this.displayX) * ANIMATION_SPEED;
             this.displayY += (targetY - this.displayY) * ANIMATION_SPEED;
             return false;
@@ -86,5 +87,5 @@ export abstract class Character {
         return false;
     }
     
-    abstract draw(ctx: CanvasRenderingContext2D): void;
+    abstract draw(ctx: CanvasRenderingContext2D, currentTime: number): void;
 }

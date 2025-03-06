@@ -6,7 +6,7 @@ export class Pacman extends Character {
   angle: number = 0;
 
   constructor(gameMap: GameMap, x: number, y: number, cellSize: number) {
-    super(gameMap, x, y, cellSize);
+    super(gameMap, x, y, cellSize, MOVE_INTERVAL);
   }
 
   get hasMoved(): boolean {
@@ -14,7 +14,7 @@ export class Pacman extends Character {
   }
 
   update(currentTime: number): void {
-    if (!this.updatePosition(currentTime, MOVE_INTERVAL)) return;
+    if (!this.updatePosition(currentTime)) return;
 
     const nextX = this.gridX + this.nextDirection.x;
     const nextY = this.gridY + this.nextDirection.y;
@@ -43,12 +43,12 @@ export class Pacman extends Character {
     else if (this.direction.y === -1) this.angle = -Math.PI/2;
   }
 
-  draw(ctx: CanvasRenderingContext2D): void {
+  draw(ctx: CanvasRenderingContext2D, currentTime: number): void {
     ctx.save();
     ctx.translate(this.displayX + this.cellSize/2, this.displayY + this.cellSize/2);
     ctx.rotate(this.angle);
 
-    const mouthOpen = this.isMoving ? (Math.sin(Date.now() * 0.05) + 1) / 4 : 0.15;
+    const mouthOpen = this.isMoving ? (Math.sin(Date.now() * 0.025) + 1) / 4 : 0.15;
 
     ctx.beginPath();
     ctx.fillStyle = '#FFFF00';
