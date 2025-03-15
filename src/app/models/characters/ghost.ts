@@ -32,11 +32,9 @@ export abstract class Ghost extends Character {
     }
 
     update(currentTime: number, gameState: GameState): void {
-        this.handleStateTransition(currentTime);
+        if (!this.updatePosition(currentTime)) return;
 
-        if (!this.updatePosition(currentTime)) {
-            return;
-        }
+        this.handleStateTransition(currentTime);
 
         if (this.gameMap.getCell(this.gridX, this.gridY) === CellType.Door) {
             const nextCell = this.gameMap.getCell(this.gridX + this.direction.x, this.gridY + this.direction.y);
@@ -103,7 +101,11 @@ export abstract class Ghost extends Character {
     
         const isOppositeDirection = x === this.gridX - this.direction.x && y === this.gridY - this.direction.y;
         return !isOppositeDirection;
-    }    
+    }
+    
+    override canPassDoor(): boolean {
+        return !this.exitedRoom;
+    }
 
     protected getDirectionTowards(target: Direction): Direction {
         return POSSIBLE_DIRECTIONS
@@ -155,7 +157,7 @@ export abstract class Ghost extends Character {
 
         if (this.state === GhostState.FRIGHTENED) {
             const timeElapsed = currentTime - this.lastStateChange;    
-            const isFlashing = timeElapsed >= 4500 && Math.floor((timeElapsed / 200) % 2) === 0;
+            const isFlashing = timeElapsed >= 5500 && Math.floor((timeElapsed / 200) % 2) === 0;
             ghostColor = isFlashing ? "#fff3e0" : "#ff6f00";
         }
 

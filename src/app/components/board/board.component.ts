@@ -1,5 +1,5 @@
-import {Subject, fromEvent, takeUntil, debounceTime} from 'rxjs';
-import {GhostPosition} from '@models/interfaces';
+import {Subject, fromEvent, takeUntil, debounceTime, Observable, map} from 'rxjs';
+import {GAME_MAP, GhostPosition} from '@models/interfaces';
 import {GameMap} from '@models/map/game-map';
 import {CommonModule} from '@angular/common';
 import {
@@ -38,6 +38,7 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   private cellSize = 0;
   
   readonly gameOver$ = this.gameService.gameOver$;
+  readonly lives$ = this.gameService.lives$;
   
   pacman!: Pacman;
   ghosts: Ghost[] = [];
@@ -70,7 +71,11 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get score$() {
-    return this.gameService.score$;
+    return this.gameService.score$.pipe(map(score => score ?? 0));
+  }
+
+  get livesArray$(): Observable<number[]> {
+    return this.lives$.pipe(map(lives => new Array(lives).fill(0)));
   }
 
   restartGame(): void {
@@ -165,9 +170,9 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dots = this.dots.filter(dot => {
       if (dot.gridX === pacmanPosition.x && dot.gridY === pacmanPosition.y) {
         if (dot.type === 0) {
-          this.gameService.updateScore(10);
+          this.gameService.eatDot();
         } else {
-          this.gameService.updateScore(10);
+          this.gameService.eatPowerPellet();
           this.ghosts.forEach(ghost => ghost.enterFrightenedState(currentTime));
         }
         
@@ -178,14 +183,12 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     if (this.dots.length === 0) {
-      // todo: you won, restart the game with the current score
-      this.gameService.gameOver();
+      this.gameMap = new GameMap(GAME_MAP);
+      this.initializeGameEntities();
     }
   }
 
   private checkGhostCollision(currentTime: number): void {
-    let ghostMultiplier = 1;
-    
     this.ghosts.forEach(ghost => {
       const gridCollision =
         Math.round(this.pacman.gridX) === Math.round(ghost.gridX) &&
@@ -194,13 +197,13 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
       
       if (gridCollision || physicalCollision) {
         if (ghost.isFrightened()) {
-          this.gameService.updateScore(200 * ghostMultiplier);
-          // todo: score calculation is wrong
-          ghostMultiplier *= 2;
-          
-          ghost.onEaten(currentTime)
+          this.gameService.eatGhost();
+          ghost.onEaten(currentTime);
+        } else if (confirm("You lost a life! Do you want to continue?")) {
+          this.gameService.loseLife();
+          this.initializeGameEntities();
         } else {
-          this.gameService.gameOver();
+          this.gameService.resetGame();
         }
       }
     });

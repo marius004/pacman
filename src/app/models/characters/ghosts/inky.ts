@@ -20,8 +20,4 @@ export class Inky extends Ghost {
 
         return this.getRandomDirection();        
     }
-
-    override canPassDoor(): boolean {
-        return !this.exitedRoom;
-    }
 }

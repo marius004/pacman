@@ -14,8 +14,4 @@ export class Pinky extends Ghost {
             y: gameState.pacmanPosition.y
         });
     }
-
-    override canPassDoor(): boolean {
-        return !this.exitedRoom;
-    }
 }

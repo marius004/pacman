@@ -21,6 +21,9 @@ export class Pacman extends Character {
 
     if (this.isValidPosition(nextX, nextY)) {
       this.direction = {...this.nextDirection};
+    } else if (this.handleTeleport()) {
+      this.lastMoveTime = currentTime + 250;
+      return;
     }
 
     const newX = this.gridX + this.direction.x;
@@ -58,4 +61,16 @@ export class Pacman extends Character {
 
     ctx.restore();
   }
+
+  private handleTeleport(): boolean {
+    const [pointA, pointB] = this.gameMap.teleportPoints;
+    const target = [pointA, pointB].find(p => this.gridX === p.x && this.gridY === p.y);
+    
+    if (target) {
+      ({x: this.gridX, y: this.gridY} = target === pointA ? pointB : pointA);
+      return true;
+    }
+    
+    return false;
+}
 }

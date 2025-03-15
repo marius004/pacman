@@ -1,6 +1,6 @@
 import { Character } from '@models/characters/character';
 import {CellType} from './cell-type';
-import {Dot} from '../interfaces';
+import {Direction, Dot} from '../interfaces';
 
 export class GameMap {
     private grid: CellType[][];
@@ -63,6 +63,15 @@ export class GameMap {
         }
         return null;
     }
+
+    get teleportPoints(): Direction[] {
+        return [...Array(this.height).keys()]
+            .flatMap(y => 
+                [0, this.width - 1]
+                    .filter(x => [CellType.Empty, CellType.Dot].includes(this.grid[y][x]))
+                    .map(x => ({ x, y }))
+            );
+    }
     
     drawWalls(ctx: CanvasRenderingContext2D, cellSize: number): void {
         ctx.fillStyle = '#0000FF';
@@ -111,4 +120,6 @@ export class GameMap {
             );
         }
     }
+
+
 }

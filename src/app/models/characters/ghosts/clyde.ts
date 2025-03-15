@@ -18,8 +18,4 @@ export class Clyde extends Ghost {
             ? this.getDirectionTowards(gameState.pacmanPosition) 
             : this.getRandomDirection();
     }
-
-    override canPassDoor(): boolean {
-        return !this.exitedRoom;
-    }
 }
