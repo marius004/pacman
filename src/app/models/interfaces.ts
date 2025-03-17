@@ -1,4 +1,5 @@
 import {GhostType} from './characters/ghost-type';
+import {GameMap} from './map/game-map';
 
 export interface GhostPosition {
     type: GhostType;
@@ -21,6 +22,8 @@ export interface Dot {
 export interface GameState {
     pacmanPosition: Direction;
     ghostPositions: GhostPosition[];
+    
+    gameMap: GameMap;
 }
 
 export const GAME_MAP = [

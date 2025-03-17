@@ -94,7 +94,7 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initializeGhosts(): void {
     this.ghosts = [
-      new Blinky(9, 7, this.gameMap, this.cellSize),
+      new Blinky(9, 8, this.gameMap, this.cellSize),
       new Clyde(8, 9, this.gameMap, this.cellSize),
       new Inky(10, 9, this.gameMap, this.cellSize),
       new Pinky(9, 9, this.gameMap, this.cellSize)
@@ -257,7 +257,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
           currentTime, 
           {
             pacmanPosition: {x: this.pacman.gridX, y: this.pacman.gridY},
-            ghostPositions: this.ghosts.map(ghost => ({ x: ghost.gridX, y: ghost.gridY, type: ghost.type } as GhostPosition))
+            ghostPositions: this.ghosts.map(ghost => ({ x: ghost.gridX, y: ghost.gridY, type: ghost.type } as GhostPosition)),
+            gameMap: this.gameMap,
           }
         );
       }

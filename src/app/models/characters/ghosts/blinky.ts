@@ -9,6 +9,6 @@ export class Blinky extends Ghost {
     }
 
     protected selectChaseDirection(gameState: GameState): Direction {
-        return this.getDirectionTowards(gameState.pacmanPosition);
+        return this.getDirectionTowards(gameState, gameState.pacmanPosition);
     }
 }

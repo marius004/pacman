@@ -9,7 +9,7 @@ export class Pinky extends Ghost {
     }
 
     protected selectChaseDirection(gameState: GameState): Direction {
-        return this.getDirectionTowards({
+        return this.getDirectionTowards(gameState, {
             x: gameState.pacmanPosition.x + 4,
             y: gameState.pacmanPosition.y
         });

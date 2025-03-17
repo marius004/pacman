@@ -12,9 +12,31 @@ const GHOST_COLORS: Record<GhostType, string> = {
     [GhostType.CLYDE]: "#FDCC08"   // Clyde  -> Orange
 };
 
+const GHOST_RESPAWN_POINT: Record<GhostType, Direction> = {
+    [GhostType.BLINKY]: {x: 9, y: 9},
+    [GhostType.PINKY]: {x: 9, y: 9},
+    [GhostType.INKY]: {x: 10, y: 9},
+    [GhostType.CLYDE]: {x: 8, y: 9}
+};
+
+const GHOST_RESPAWN_TIME: Record<GhostType, number> = {
+    [GhostType.BLINKY]: 1500,
+    [GhostType.PINKY]:  2000,
+    [GhostType.INKY]:   4000,
+    [GhostType.CLYDE]:  6000
+};
+
 const SCATTER_CHASE_CYCLE = [7000, 20000, 7000, 20000, 5000, 20000, 5000, Infinity];
 
-export abstract class Ghost extends Character {
+const GHOST_BASE_SPEED = MOVE_INTERVAL * 1.3;
+const SPEED_INCREASE_INTERVAL = 10000; // 30 seconds
+
+type NodePath = {
+    distance: number;
+    parent: Direction | null;
+} | null;
+
+export abstract class Ghost extends Character {    
     protected scatterTarget: Direction;
 
     protected state = GhostState.SCATTER;
@@ -25,7 +47,7 @@ export abstract class Ghost extends Character {
     readonly type: GhostType;
 
     constructor(type: GhostType, x: number, y: number, gameMap: GameMap, cellSize: number) {
-        super(gameMap, x, y, cellSize, MOVE_INTERVAL * 1.3);
+        super(gameMap, x, y, cellSize, GHOST_BASE_SPEED);
 
         this.scatterTarget = this.getScatterTarget(type, gameMap);
         this.type = type;
@@ -35,6 +57,7 @@ export abstract class Ghost extends Character {
         if (!this.updatePosition(currentTime)) return;
 
         this.handleStateTransition(currentTime);
+        this.updateSpeed(currentTime);
 
         if (this.gameMap.getCell(this.gridX, this.gridY) === CellType.Door) {
             const nextCell = this.gameMap.getCell(this.gridX + this.direction.x, this.gridY + this.direction.y);
@@ -43,7 +66,7 @@ export abstract class Ghost extends Character {
 
         switch (this.state) {
             case GhostState.SCATTER:
-                this.direction = this.getDirectionTowards(this.scatterTarget);
+                this.direction = this.getDirectionTowards(gameState, this.scatterTarget);
                 break;
             case GhostState.CHASE:
                 this.direction = this.selectChaseDirection(gameState);
@@ -53,7 +76,7 @@ export abstract class Ghost extends Character {
                 break;
         }
 
-        if (!this.canMoveToNextPosition()) {
+        if (!this.isValidPosition(this.gridX + this.direction.x, this.gridY + this.direction.y)) {
             this.direction = this.getValidRandomDirection();
         }
 
@@ -79,18 +102,26 @@ export abstract class Ghost extends Character {
     onEaten(currentTime: number): void {
         this.lastStateChange = currentTime;
         this.state = GhostState.SCATTER;
-        this.exitedRoom = false;
+        this.exitedRoom = true;
 
-        this.gridX = 9;
-        this.gridY = 9;
+        this.gridX = GHOST_RESPAWN_POINT[this.type].x;
+        this.gridY = GHOST_RESPAWN_POINT[this.type].y;
+        
+        // ghosts must wait a little bit before leaving
+        setTimeout(() => {
+            this.exitedRoom = false;
+        }, GHOST_RESPAWN_TIME[this.type]);
     }
 
     isFrightened(): boolean {
         return this.state == GhostState.FRIGHTENED;
     }
+    
+    override canPassDoor(): boolean {
+        return !this.exitedRoom;
+    }
 
     override isValidPosition(x: number, y: number): boolean {
-        // todo: use A* instead...
         if (!super.isValidPosition(x, y)) return false;
     
         const validMoves = POSSIBLE_DIRECTIONS.filter(({ x: dx, y: dy }) =>
@@ -102,31 +133,46 @@ export abstract class Ghost extends Character {
         const isOppositeDirection = x === this.gridX - this.direction.x && y === this.gridY - this.direction.y;
         return !isOppositeDirection;
     }
+
+    protected getDirectionTowards(gameState: GameState, target: Direction): Direction {
+        const {width, height} = gameState.gameMap;
+        
+        const targetX = Math.max(0, Math.min(target.x, width - 1));
+        const targetY = Math.max(0, Math.min(target.y, height - 1));
     
-    override canPassDoor(): boolean {
-        return !this.exitedRoom;
-    }
-
-    protected getDirectionTowards(target: Direction): Direction {
-        return POSSIBLE_DIRECTIONS
-            .map(dir => ({
-                dir,
-                distance: Math.pow(target.x - (this.gridX + dir.x), 2) 
-                        + Math.pow(target.y - (this.gridY + dir.y), 2)
-            }))
-            .filter(({dir}) => this.isValidPosition(this.gridX + dir.x, this.gridY + dir.y))
-            .reduce<{dir: Direction | null; distance: number}>(
-                (best, current) => (current.distance < best.distance ? current : best),
-                {dir: null, distance: Infinity}
-            ).dir ?? this.getValidRandomDirection();
-    }
-
-    protected getRandomDirection(): Direction {
-        return POSSIBLE_DIRECTIONS[Math.floor(Math.random() * POSSIBLE_DIRECTIONS.length)];
-    }
-
-    protected canMoveToNextPosition(): boolean {
-        return this.isValidPosition(this.gridX + this.direction.x, this.gridY + this.direction.y);
+        let queue: [number, number][] = [[this.gridX, this.gridY]];
+        let cost: NodePath[][] = Array.from({ length: width }, () =>
+            Array.from({ length: height }, () => null)
+        );
+    
+        cost[this.gridX][this.gridY] = {distance: 0, parent: null};
+        let closest = {
+            x: this.gridX,
+            y: this.gridY, 
+            distance: Math.abs(this.gridX - targetX) + Math.abs(this.gridY - targetY) 
+        };
+    
+        while (queue.length) {
+            const [x, y] = queue.shift()!;
+            const distance = Math.abs(x - targetX) + Math.abs(y - targetY);
+    
+            if (distance < closest.distance) closest = {x, y, distance};
+            if (x === targetX && y === targetY) break;
+    
+            for (const dir of POSSIBLE_DIRECTIONS) {
+                const nx = x + dir.x, ny = y + dir.y;
+    
+                if (!this.isValidPosition(nx, ny) || cost[nx][ny]) continue;
+    
+                cost[nx][ny] = {
+                    distance: cost[x][y]!.distance + 1, 
+                    parent: { x: -dir.x, y: -dir.y } 
+                };
+                queue.push([nx, ny]);
+            }
+        }
+    
+        return this.traceBackDirection(cost, closest.x, closest.y);
     }
 
     protected getValidRandomDirection(): Direction {
@@ -203,14 +249,42 @@ export abstract class Ghost extends Character {
         }
     }
 
+    private updateSpeed(currentTime: number): void {
+        if (this.state === GhostState.FRIGHTENED) {
+            this.moveInterval = GHOST_BASE_SPEED * 0.8;
+            return;
+        }
+        
+        const speedIncrease = Math.min(Math.floor(currentTime / SPEED_INCREASE_INTERVAL) * 0.05);
+        this.moveInterval = MOVE_INTERVAL * Math.max(1.3 - speedIncrease, 1.15);
+    }
+
     private getScatterTarget(type: GhostType, gameMap: GameMap) {
         const SCATTER_TARGETS: Record<GhostType, Direction> = {
-            [GhostType.INKY]: {x: gameMap.width, y: gameMap.height},
-            [GhostType.BLINKY]: {x: gameMap.width, y: 0},
-            [GhostType.CLYDE]: {x: 0, y: gameMap.height},
+            [GhostType.INKY]: {x: gameMap.width - 1, y: gameMap.height - 1},
+            [GhostType.BLINKY]: {x: gameMap.width - 1, y: 0},
+            [GhostType.CLYDE]: {x: 0, y: gameMap.height - 1},
             [GhostType.PINKY]: {x: 0, y: 0}
         };
 
         return SCATTER_TARGETS[type];
+    }
+
+    private traceBackDirection(cost: NodePath[][], x: number, y: number): Direction {
+        while (cost[x][y]?.parent) {
+            const parent = cost[x][y]!.parent!;
+            const px = x + parent.x, py = y + parent.y;
+    
+            if (px === this.gridX && py === this.gridY) {
+                return {
+                    x: x - px,
+                    y: y - py
+                };
+            }
+    
+            x = px;
+            y = py;
+        }
+        return this.getValidRandomDirection();
     }
 }

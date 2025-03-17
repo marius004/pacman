@@ -15,9 +15,9 @@ export class Inky extends Ghost {
                 x: gameState.pacmanPosition.x + (gameState.pacmanPosition.x - blinky.x),
                 y: gameState.pacmanPosition.y + (gameState.pacmanPosition.y - blinky.y)
             };
-            return this.getDirectionTowards(target);
+            return this.getDirectionTowards(gameState, target);
         }
 
-        return this.getRandomDirection();        
+        return this.getValidRandomDirection();        
     }
 }

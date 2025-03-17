@@ -15,7 +15,7 @@ export class Clyde extends Ghost {
         );
 
         return distanceToPacman > 8 
-            ? this.getDirectionTowards(gameState.pacmanPosition) 
-            : this.getRandomDirection();
+            ? this.getDirectionTowards(gameState, gameState.pacmanPosition) 
+            : this.getDirectionTowards(gameState, this.scatterTarget);
     }
 }
