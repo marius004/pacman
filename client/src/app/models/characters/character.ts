@@ -29,7 +29,10 @@ export abstract class Character {
     gameMap: GameMap;
     isMoving: boolean;
 
-    constructor(gameMap: GameMap, gridX: number, gridY: number, cellSize: number, moveInterval: number) {
+    simulationMode: boolean;
+
+    constructor(gameMap: GameMap, gridX: number, gridY: number, cellSize: number, moveInterval: number, simulationMode: boolean) {
+        this.simulationMode = simulationMode;
         this.moveInterval = moveInterval;
 
         this.cellSize = cellSize;

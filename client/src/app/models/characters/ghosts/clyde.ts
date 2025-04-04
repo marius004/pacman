@@ -4,8 +4,8 @@ import {GhostType} from '../ghost-type';
 import {Ghost} from '../ghost';
 
 export class Clyde extends Ghost {
-    constructor(x: number, y: number, gameMap: GameMap, cellSize: number) {
-        super(GhostType.CLYDE, x, y, gameMap, cellSize);
+    constructor(x: number, y: number, gameMap: GameMap, cellSize: number, simulationMode: boolean) {
+        super(GhostType.CLYDE, x, y, gameMap, cellSize, simulationMode);
     }
 
     protected selectChaseDirection(gameState: GameState): Direction {

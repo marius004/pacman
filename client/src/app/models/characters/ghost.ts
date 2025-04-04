@@ -29,7 +29,7 @@ const GHOST_RESPAWN_TIME: Record<GhostType, number> = {
 const SCATTER_CHASE_CYCLE = [7000, 20000, 7000, 20000, 5000, 20000, 5000, Infinity];
 
 const GHOST_BASE_SPEED = MOVE_INTERVAL * 1.3;
-const SPEED_INCREASE_INTERVAL = 10000; // 30 seconds
+const SPEED_INCREASE_INTERVAL = 10000;
 
 type NodePath = {
     distance: number;
@@ -46,8 +46,8 @@ export abstract class Ghost extends Character {
     
     readonly type: GhostType;
 
-    constructor(type: GhostType, x: number, y: number, gameMap: GameMap, cellSize: number) {
-        super(gameMap, x, y, cellSize, GHOST_BASE_SPEED);
+    constructor(type: GhostType, x: number, y: number, gameMap: GameMap, cellSize: number, simulationMode: boolean) {
+        super(gameMap, x, y, cellSize, GHOST_BASE_SPEED, simulationMode);
 
         this.scatterTarget = this.getScatterTarget(type, gameMap);
         this.type = type;
@@ -64,16 +64,18 @@ export abstract class Ghost extends Character {
             this.exitedRoom = nextCell !== CellType.GhostCell;
         }
 
-        switch (this.state) {
-            case GhostState.SCATTER:
-                this.direction = this.getDirectionTowards(gameState, this.scatterTarget);
-                break;
-            case GhostState.CHASE:
-                this.direction = this.selectChaseDirection(gameState);
-                break;
-            default:
-                this.direction = this.getValidRandomDirection();
-                break;
+        if (!this.simulationMode) {
+            switch (this.state) {
+                case GhostState.SCATTER:
+                    this.direction = this.getDirectionTowards(gameState, this.scatterTarget);
+                    break;
+                case GhostState.CHASE:
+                    this.direction = this.selectChaseDirection(gameState);
+                    break;
+                default:
+                    this.direction = this.getValidRandomDirection();
+                    break;
+            }
         }
 
         if (!this.isValidPosition(this.gridX + this.direction.x, this.gridY + this.direction.y)) {

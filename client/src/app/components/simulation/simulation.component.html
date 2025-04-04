@@ -1,0 +1,20 @@
+<div class="game-container">
+  <div class="status-bar">
+    <div class="score">Score: {{ score$ | async }}</div>
+    <div class="lives">
+      <i *ngFor="let _ of (livesArray$ | async)" class="fas fa-heart life-icon"></i>
+    </div>
+  </div>
+
+  <canvas #gameCanvas></canvas>
+
+  <ng-container *ngIf="gameOver$ | async">
+    <div class="modal-backdrop">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <h2>Game Over!</h2>
+        <p *ngIf="score$ | async as score">Final Score: {{ score }}</p>
+        <button (click)="restartGame()">Play Again</button>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,4 +1,4 @@
-import {Subject, fromEvent, takeUntil, debounceTime, Observable, map} from 'rxjs';
+import {Subject, takeUntil, Observable, map} from 'rxjs';
 import {GAME_MAP, GhostPosition} from '@models/interfaces';
 import {GameMap} from '@models/map/game-map';
 import {CommonModule} from '@angular/common';
@@ -9,33 +9,38 @@ import {
 } from '@angular/core';
 
 import {Pacman} from '@models/characters/pacman';
-import {Dot, Direction} from '@models/interfaces';
+import {Dot} from '@models/interfaces';
 import {Ghost} from '@models/characters/ghost';
 
+import {ReinforcementLearningAgentService} from '@services/reinforcement-learning-agent.service';
 import {Blinky} from '@models/characters/ghosts/blinky';
 import {Clyde} from '@models/characters/ghosts/clyde';
 import {Pinky} from '@models/characters/ghosts/pinky';
 import {Inky} from '@models/characters/ghosts/inky';
 import {GameService} from '@services/game.service';
 import {CellType} from '@models/map/cell-type';
+import {EpisodeSample} from '@models/http/episode-sample';
 
 @Component({
-  selector: 'app-board',
+  selector: 'app-simulation',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './board.component.html',
-  styleUrl: './board.component.scss'
+  templateUrl: './simulation.component.html',
+  styleUrl: './simulation.component.scss'
 })
-export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SimulationComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('gameCanvas') private readonly canvasRef!: ElementRef<HTMLCanvasElement>;
   @Input() gameMap!: GameMap;
 
   private readonly gameService = inject(GameService);
+  private readonly rlAgentService = inject(ReinforcementLearningAgentService);
   private readonly destroyed$ = new Subject<void>();
   
   private ctx!: CanvasRenderingContext2D;
   private animationFrame = 0;
   private cellSize = 0;
+  private episodeSamples: EpisodeSample[] = [];
+  private currentSampleIndex = 0;
   
   readonly gameOver$ = this.gameService.gameOver$;
   readonly lives$ = this.gameService.lives$;
@@ -46,17 +51,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.cellSize = this.calculateInitialCellSize();
-    
     this.initializeGameEntities();
-    this.setupKeyboardControls();
-    this.setupWindowResize();
-
-    this.gameOver$.subscribe(value => {
-      if (value) {
-        this.pacman.setGameOver();
-        this.ghosts.forEach(ghost => ghost.setGameOver());
-      }
-    });
+    this.loadEpisodeSamples("dqn");
   }
 
   ngAfterViewInit(): void {
@@ -70,8 +66,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     cancelAnimationFrame(this.animationFrame);
   }
 
-  get score$() {
-    return this.gameService.score$.pipe(map(score => score ?? 0));
+  get score$(): Observable<number> {
+    return this.gameService.score$;
   }
 
   get livesArray$(): Observable<number[]> {
@@ -82,6 +78,17 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gameService.resetGame();
   }
 
+  private loadEpisodeSamples(agent: string): void {
+    this.rlAgentService.getEpisode(agent).pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe({
+      next: (samples: EpisodeSample[]) => {
+        this.episodeSamples = samples;
+        this.currentSampleIndex = 0;
+      }
+    });
+  }
+
   private initializeGameEntities(): void {
     this.dots = this.gameMap.dots;
     this.initializePacman();
@@ -89,16 +96,20 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initializePacman(): void {
-    this.pacman = new Pacman(this.gameMap, 9, 15, this.cellSize, false);
+    this.pacman = new Pacman(this.gameMap, 9, 15, this.cellSize, true);
   }
 
   private initializeGhosts(): void {
     this.ghosts = [
-      new Blinky(9, 8, this.gameMap, this.cellSize, false),
-      new Clyde(8, 9, this.gameMap, this.cellSize, false),
-      new Inky(10, 9, this.gameMap, this.cellSize, false),
-      new Pinky(9, 9, this.gameMap, this.cellSize, false)
+      new Blinky(9, 8, this.gameMap, this.cellSize, true),
+      new Clyde(8, 9, this.gameMap, this.cellSize, true),
+      new Inky(10, 9, this.gameMap, this.cellSize, true),
+      new Pinky(9, 9, this.gameMap, this.cellSize, true)
     ];
+
+    this.ghosts.forEach(ghost => {
+      console.log(ghost.direction);
+    })
   }
 
   private calculateInitialCellSize(): number {
@@ -117,38 +128,12 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     const canvas = this.canvasRef.nativeElement;
     this.resizeCanvas(canvas);
     
-    this.ctx = canvas.getContext('2d')!;
+    const context = canvas.getContext('2d');
+    if (!context) {
+      throw new Error('Could not get canvas context');
+    }
+    this.ctx = context;
     this.ctx.imageSmoothingEnabled = true;
-  }
-
-  private setupKeyboardControls(): void {
-    const directionMap = new Map<string, Direction>([
-      ['ArrowLeft', { x: -1, y: 0 }], ['a', { x: -1, y: 0 }], ['A', { x: -1, y: 0 }],
-      ['ArrowRight', { x: 1, y: 0 }], ['d', { x: 1, y: 0 }], ['D', { x: 1, y: 0 }],
-      ['ArrowUp', { x: 0, y: -1 }], ['w', { x: 0, y: -1 }], ['W', { x: 0, y: -1 }],
-      ['ArrowDown', { x: 0, y: 1 }], ['s', { x: 0, y: 1 }], ['S', { x: 0, y: 1 }]
-    ]);
-
-    fromEvent<KeyboardEvent>(window, 'keydown')
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(({key}) => {
-        const direction = directionMap.get(key);
-        if (direction) {
-          this.pacman.nextDirection = direction;
-        }
-      });
-  }
-
-  private setupWindowResize(): void {
-    fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(250),
-        takeUntil(this.destroyed$)
-      )
-      .subscribe(() => {
-        this.cellSize = this.calculateInitialCellSize();
-        this.resizeCanvas(this.canvasRef.nativeElement);
-      });
   }
 
   private resizeCanvas(canvas: HTMLCanvasElement): void {
@@ -199,11 +184,11 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
         if (ghost.isFrightened()) {
           this.gameService.eatGhost();
           ghost.onEaten(currentTime);
-        } else if (confirm("You lost a life! Do you want to continue?")) {
-          this.gameService.loseLife();
-          this.initializeGameEntities();
         } else {
-          this.gameService.resetGame();
+          this.gameService.loseLife();
+          if (this.gameService.currentLives > 0) {
+            this.initializeGameEntities();
+          }
         }
       }
     });
@@ -250,19 +235,37 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private updateGameState(currentTime: number): void {
-    this.pacman.update(currentTime);
-    this.ghosts.forEach(ghost => {
-      if (this.pacman.hasMoved) {
-        ghost.update(
-          currentTime, 
-          {
-            pacmanPosition: {x: this.pacman.gridX, y: this.pacman.gridY},
-            ghostPositions: this.ghosts.map(ghost => ({ x: ghost.gridX, y: ghost.gridY, type: ghost.type } as GhostPosition)),
-            gameMap: this.gameMap,
+    if (this.episodeSamples.length > 0 && this.currentSampleIndex < this.episodeSamples.length) {
+      const sample = this.episodeSamples[this.currentSampleIndex];
+      
+      if (currentTime - sample.timestamp >= 225) {
+        this.pacman.nextDirection = {
+          x: sample.pacman[0] - this.pacman.gridX,
+          y: sample.pacman[1] - this.pacman.gridY
+        };
+
+        sample.ghosts.forEach(ghostData => {
+          const ghost = this.ghosts.find(ghost => Number(ghost.type) === ghostData[2]);
+          
+          if (ghost) {
+            ghost.direction = {
+              x: ghostData[0] - ghost.gridX,
+              y: ghostData[1] - ghost.gridY
+            }
           }
-        );
+        });
+        
+        this.currentSampleIndex++;
       }
-    });
+    }
+
+    this.pacman.update(currentTime);
+    this.ghosts.forEach(ghost => ghost.update(currentTime, {
+      pacmanPosition: {x: this.pacman.gridX, y: this.pacman.gridY},
+      ghostPositions: this.ghosts.map(g => ({ x: g.gridX, y: g.gridY, type: g.type } as GhostPosition)),
+      gameMap: this.gameMap,
+    }));
+    
     this.checkCollisions(currentTime);
   }
 }

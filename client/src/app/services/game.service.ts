@@ -19,6 +19,10 @@ export class GameService {
     this.scoreSubject.next(this.scoreSubject.value + points);
   }
 
+  get currentLives(): number {
+    return this.livesSubject.value;
+  }
+
   eatDot() {
     this.updateScore(10);
   }

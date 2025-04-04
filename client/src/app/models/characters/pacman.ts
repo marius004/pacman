@@ -5,8 +5,8 @@ export class Pacman extends Character {
   moved: boolean = false;
   angle: number = 0;
 
-  constructor(gameMap: GameMap, x: number, y: number, cellSize: number) {
-    super(gameMap, x, y, cellSize, MOVE_INTERVAL);
+  constructor(gameMap: GameMap, x: number, y: number, cellSize: number, simulationMode: boolean) {
+    super(gameMap, x, y, cellSize, MOVE_INTERVAL, simulationMode);
   }
 
   get hasMoved(): boolean {

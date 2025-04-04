@@ -4,8 +4,8 @@ import {GhostType} from '../ghost-type';
 import {Ghost} from '../ghost';
 
 export class Pinky extends Ghost {
-    constructor(x: number, y: number, gameMap: GameMap, cellSize: number) {
-        super(GhostType.PINKY, x, y, gameMap, cellSize);
+    constructor(x: number, y: number, gameMap: GameMap, cellSize: number,simulationMode: boolean) {
+        super(GhostType.PINKY, x, y, gameMap, cellSize, simulationMode);
     }
 
     protected selectChaseDirection(gameState: GameState): Direction {
