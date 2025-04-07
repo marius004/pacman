@@ -59,7 +59,7 @@ def list_trained_agents():
     return agents
 
 @app.get("/{agent}/{model_name}/{checkpoint}")
-def get_dqn_results(agent: str, model_name: str, checkpoint: int):
+def get_agent_results(agent: str, model_name: str, checkpoint: int):
     model_base_path = f"agents/{agent}/{model_name}"
 
     if not os.path.exists(model_base_path):

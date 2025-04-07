@@ -426,5 +426,4 @@ export class SimulationComponent implements OnInit, OnDestroy {
       return '{}';
     }
   }
-  
 }
