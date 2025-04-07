@@ -217,14 +217,14 @@ export class SimulationComponent implements OnInit, OnDestroy {
   }
 
   private calculateInitialCellSize(): number {
-    const { innerWidth: width, innerHeight: height } = window;
+    const {innerWidth: width, innerHeight: height} = window;
     const gridRatio = this.gameMap.width / this.gameMap.height;
     const windowRatio = width / height;
 
     return Math.floor(
       windowRatio > gridRatio
-        ? (height * 0.95) / this.gameMap.height
-        : (width * 0.95) / this.gameMap.width
+        ? (height * 0.75) / this.gameMap.height
+        : (width * 0.75) / this.gameMap.width
     );
   }
 
@@ -412,5 +412,23 @@ export class SimulationComponent implements OnInit, OnDestroy {
 
     this.initializeGameEntities();
     this.gameService.resetGame();
+  }
+
+  formatDescription(description: Record<string, any> | undefined): string {  
+    if (!description)
+      return "{}";
+
+    try {
+      if (Object.keys(description).length === 0) return "{}";
+  
+      return JSON.stringify(
+        description,
+        (key, value) => value,
+        2
+      );
+    } catch (error) {
+      console.error('Error formatting description:', error);
+      return 'Invalid description object';
+    }
   }
 }

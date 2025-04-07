@@ -26,10 +26,27 @@
         <button (click)="loadPreviousCheckpoint()" [disabled]="currentCheckpoint === 0"><b>←</b> Previous</button>
         <button (click)="loadNextCheckpoint()" [disabled]="currentCheckpoint >= selectedAgent.checkpoints - 1">Next <b>→</b></button>
       </div>
-
     </div>
     
-    <canvas #gameCanvas></canvas>
+    <div class="game-content">
+      <div class="canvas-container">
+        <canvas #gameCanvas></canvas>
+      </div>
+      
+      <div class="agent-details-panel">
+        <h3>Agent Details</h3>
+        <div class="detail-row">
+          <strong>Model:</strong> {{selectedAgent?.model_name}}
+        </div>
+        <div class="detail-row">
+          <strong>Checkpoint:</strong> {{currentCheckpoint + 1}}/{{selectedAgent?.checkpoints}}
+        </div>
+        <div class="detail-row">
+          <strong>Description:</strong>
+          <pre>{{formatDescription(selectedAgent?.description)}}</pre>
+        </div>
+      </div>
+    </div>
     
     <ng-container *ngIf="gameOver$ | async">
       <div class="modal-backdrop">
