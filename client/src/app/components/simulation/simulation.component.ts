@@ -414,21 +414,17 @@ export class SimulationComponent implements OnInit, OnDestroy {
     this.gameService.resetGame();
   }
 
-  formatDescription(description: Record<string, any> | undefined): string {  
-    if (!description)
-      return "{}";
-
-    try {
-      if (Object.keys(description).length === 0) return "{}";
+  formatDescription(description?: Record<string, any>): string {
+    if (!description || Object.keys(description).length === 0) {
+      return '{}';
+    }
   
-      return JSON.stringify(
-        description,
-        (key, value) => value,
-        2
-      );
+    try {
+      return JSON.stringify(description, null, 2);
     } catch (error) {
       console.error('Error formatting description:', error);
-      return 'Invalid description object';
+      return '{}';
     }
   }
+  
 }
