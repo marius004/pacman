@@ -68,6 +68,7 @@ export abstract class Character {
             this.displayY += (targetY - this.displayY) * ANIMATION_SPEED;
             return false;
         }
+        
         return true;
     }
 

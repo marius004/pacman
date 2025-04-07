@@ -30,7 +30,7 @@ class PacmanTrainer:
         )
         
         checkpoint_callback = CheckpointCallback(
-            save_freq=5_000,
+            save_freq=20_000,
             save_path=os.path.join(self.path, "checkpoints"),
             name_prefix="model",
             verbose=1

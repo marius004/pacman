@@ -1,20 +1,53 @@
 <div class="game-container">
-  <div class="status-bar">
-    <div class="score">Score: {{ score$ | async }}</div>
-    <div class="lives">
-      <i *ngFor="let _ of (livesArray$ | async)" class="fas fa-heart life-icon"></i>
+  <!-- Agent Selection Interface -->
+  <div class="agent-selection" *ngIf="!gameStarted">
+    <h2>Select Reinforcement Learning Agent</h2>
+    <div class="select-container">
+      <select [(ngModel)]="selectedAgent" [compareWith]="compareAgents">
+        <option [ngValue]="null" disabled>Select an agent</option>
+        <option *ngFor="let agent of agentList" [ngValue]="agent">
+          {{agent.model_name}} ({{agent.checkpoints}} checkpoints)
+        </option>
+      </select>
+      <button [disabled]="!selectedAgent" (click)="startSimulation()">Start Simulation</button>
     </div>
   </div>
+  
+  <!-- Game Interface -->
+  <div class="game-view" *ngIf="gameStarted">
+    <div class="status-bar">
+      <div class="score">Score: {{ score$ | async }}</div>
 
-  <canvas #gameCanvas></canvas>
-
-  <ng-container *ngIf="gameOver$ | async">
-    <div class="modal-backdrop">
-      <div class="modal" (click)="$event.stopPropagation()">
-        <h2>Game Over!</h2>
-        <p *ngIf="score$ | async as score">Final Score: {{ score }}</p>
-        <button (click)="restartGame()">Play Again</button>
+      <div class="checkpoint-status" *ngIf="checkpointsLoaded && selectedAgent">
+        Checkpoint: {{ currentCheckpoint + 1 }}/{{ selectedAgent.checkpoints }}
       </div>
+
+      <div class="navigation-buttons" *ngIf="checkpointsLoaded && selectedAgent">
+        <button (click)="loadPreviousCheckpoint()" [disabled]="currentCheckpoint === 0"><b>←</b> Previous</button>
+        <button (click)="loadNextCheckpoint()" [disabled]="currentCheckpoint >= selectedAgent.checkpoints - 1">Next <b>→</b></button>
+      </div>
+
     </div>
-  </ng-container>
+    
+    <canvas #gameCanvas></canvas>
+    
+    <ng-container *ngIf="gameOver$ | async">
+      <div class="modal-backdrop">
+        <div class="modal" (click)="$event.stopPropagation()">
+          <h2>Game Over!</h2>
+          <p *ngIf="score$ | async as score">Final Score: {{ score }}</p>
+          <p *ngIf="selectedAgent && currentCheckpoint < selectedAgent.checkpoints - 1">
+            Loading next checkpoint in 2 seconds...
+          </p>
+          <div *ngIf="selectedAgent && currentCheckpoint >= selectedAgent.checkpoints - 1">
+            <p>All checkpoints completed!</p>
+            <div class="modal-buttons">
+              <button (click)="continueSimulation()">Continue</button>
+              <button (click)="router.navigate(['/'])">Return to Homepage</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>

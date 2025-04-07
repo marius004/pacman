@@ -5,6 +5,7 @@ from typing import Tuple
 from enum import Enum
 
 import numpy as np
+import math
 
 class GhostType(Enum):
     BLINKY = 0
@@ -227,10 +228,9 @@ class Ghost:
             if self._is_valid_position(self.gridX + direction.x, self.gridY + direction.y)
         ]
         
-        if valid_directions:
-            return valid_directions[np.random.choice(len(valid_directions))]
-        return self.direction
-    
+        direction_index = self.get_random_integer(0, len(valid_directions))
+        return valid_directions[direction_index] if valid_directions else self.direction
+        
     def _select_chase_direction(self, game_state: dict) -> Direction:
         return self._get_valid_random_direction()
     
@@ -251,6 +251,12 @@ class Ghost:
         
         self.gridX, self.gridY = respawn_points[self.type]
         self.exited_room = False
+        
+    def get_random_integer(self, a: int, b: int) -> int:
+        seed = 31 * self.gridX + self.gridY
+        
+        pseudo_random = abs(math.sin(seed) * 10000)
+        return 0 if b - a == 0 else a + int(pseudo_random % (b - a))
     
     def is_frightened(self) -> bool:
         return self.state == GhostState.FRIGHTENED

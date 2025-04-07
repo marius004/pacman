@@ -1,4 +1,4 @@
-import {Subject, fromEvent, takeUntil, debounceTime, Observable, map} from 'rxjs';
+import {Subject, fromEvent, takeUntil, debounceTime, map} from 'rxjs';
 import {GAME_MAP, GhostPosition} from '@models/interfaces';
 import {GameMap} from '@models/map/game-map';
 import {CommonModule} from '@angular/common';
@@ -38,7 +38,6 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   private cellSize = 0;
   
   readonly gameOver$ = this.gameService.gameOver$;
-  readonly lives$ = this.gameService.lives$;
   
   pacman!: Pacman;
   ghosts: Ghost[] = [];
@@ -74,12 +73,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.gameService.score$.pipe(map(score => score ?? 0));
   }
 
-  get livesArray$(): Observable<number[]> {
-    return this.lives$.pipe(map(lives => new Array(lives).fill(0)));
-  }
-
   restartGame(): void {
-    this.gameService.resetGame();
+    window.location.reload();
   }
 
   private initializeGameEntities(): void {
@@ -199,11 +194,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
         if (ghost.isFrightened()) {
           this.gameService.eatGhost();
           ghost.onEaten(currentTime);
-        } else if (confirm("You lost a life! Do you want to continue?")) {
-          this.gameService.loseLife();
-          this.initializeGameEntities();
         } else {
-          this.gameService.resetGame();
+          this.gameService.gameOver();
         }
       }
     });

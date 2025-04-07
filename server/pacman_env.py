@@ -22,12 +22,12 @@ class PacmanEnv(gym.Env):
             # Pac-Man's position [x, y]  
             'pacman': spaces.Box(low=0, high=19, shape=(2,), dtype=np.int32),
             
-            # Ghost: [x, y, type, state, frightened timer] for 4 ghosts  
+            # Ghost: [x, y, type, state, frightened timer, normalized_distance]
             'ghosts': spaces.Box(
-                low=np.array([[0, 0, 0, 0, 0]] * 4),
-                high=np.array([[19, 19, 3, 2, 7000]] * 4),
-                shape=(4, 5), 
-                dtype=np.int32
+                low=np.array([[0, 0, 0, 0, 0, 0]] * 4),
+                high=np.array([[19, 19, 3, 2, 7000, 1]] * 4),
+                shape=(4, 6),
+                dtype=np.float32
             ),
             
             # Power pellet positions [x, y]  
@@ -37,25 +37,9 @@ class PacmanEnv(gym.Env):
             'nearest_dots': spaces.Box(low=0, high=19, shape=(4,3), dtype=np.int32),
             'nearest_power_pellets': spaces.Box(low=0, high=19, shape=(2,3), dtype=np.int32),
             
-            # Distances from each ghost to Pac-Man (normalized)  
-            'ghost_distances': spaces.Box(low=0, high=1, shape=(4,2), dtype=np.float32),
-            
             # Remaining dots and percentage of dots eaten  
             'dots_left': spaces.Box(low=0, high=240, shape=(1,), dtype=np.int32),
             'dots_eaten_percentage': spaces.Box(low=0, high=1, shape=(1,), dtype=np.float32),
-            
-            # Lives remaining
-            'lives': spaces.Box(low=0, high=3, shape=(1,), dtype=np.int32),
-            
-            # Ghost proximity (1 or 2 steps away)  
-            'chasing_ghost_one_step_away': spaces.Box(low=0, high=1, shape=(1,), dtype=np.int32), 
-            'chasing_ghost_two_steps_away': spaces.Box(low=0, high=1, shape=(1,), dtype=np.int32),
-            
-            'scatter_ghost_one_step_away': spaces.Box(low=0, high=1, shape=(1,), dtype=np.int32), 
-            'scatter_ghost_two_steps_away': spaces.Box(low=0, high=1, shape=(1,), dtype=np.int32),
-
-            'frightened_ghost_one_step_away': spaces.Box(low=0, high=1, shape=(1,), dtype=np.int32), 
-            'frightened_ghost_two_steps_away': spaces.Box(low=0, high=1, shape=(1,), dtype=np.int32),
             
             'pacman_legal_moves': spaces.Box(low=0, high=1, shape=(4,), dtype=np.int32),
             'ghost_legal_moves': spaces.Box(
@@ -80,36 +64,6 @@ class PacmanEnv(gym.Env):
         self.game_map = GameMap(deepcopy(GAME_MAP))
         self.pacman = Pacman(self.game_map, 9, 15, 20)
         
-        self.ghosts = [
-            Blinky(9, 8, self.game_map, 20),
-            Clyde(8, 9, self.game_map, 20),
-            Inky(10, 9, self.game_map, 20),
-            Pinky(9, 9, self.game_map, 20)
-        ]
-        
-        self.dots = self.game_map.get_dots()
-        self.game_over = False
-        self.lives = 3
-        self.score = 0
-        
-        self.last_pellet_eaten_time = 0
-        self.last_ghost_eaten_time = 0
-        self.last_dot_eaten_time = 0
-
-        self.ghost_streak = 200
-        self.current_time = 0
-        
-        self.previous_dots_count = len(self.dots)
-        self.previous_lives = 3
-        self.previous_score = 0
-        
-        obs = self._flatten_observation(self._get_obs())
-        return obs, self._get_info()
-    
-    def reset(self, **kwargs):
-        self.game_map = GameMap(deepcopy(GAME_MAP))
-        self.pacman = Pacman(self.game_map, 9, 15, 20)
-        
         self.total_initial_dots = sum([
             self.game_map.get_cell(i, j) in [CellType.Dot, CellType.PowerPellet]
             for i in range(self.game_map.height)
@@ -125,19 +79,10 @@ class PacmanEnv(gym.Env):
         
         self.dots = self.game_map.get_dots()
         self.game_over = False
-        self.lives = 3
-        self.score = 0
-        
-        self.last_pellet_eaten_time = 0
-        self.last_ghost_eaten_time = 0
-        self.last_dot_eaten_time = 0
+        self.score  = 0
 
         self.ghost_streak = 200
         self.current_time = 0
-        
-        self.previous_dots_count = len(self.dots)
-        self.previous_lives = 3
-        self.previous_score = 0
         
         return self._flatten_observation(self._get_obs()), self._get_info()
     
@@ -148,6 +93,7 @@ class PacmanEnv(gym.Env):
         if self.game_over:
             return self._flatten_observation(self._get_obs()), -250, True, False, self._get_info()
         
+        old_score = self.score
         dots_before = len(self.dots)
         
         if 0 <= action < len(DIRECTION_MAP):
@@ -179,9 +125,8 @@ class PacmanEnv(gym.Env):
                 Pinky(9, 9, self.game_map, 20)
             ]
             self.dots = self.game_map.get_dots()
-            self.previous_dots_count = len(self.dots)
         
-        reward = self._calculate_reward(dots_before, ghost_collision, ghost_eaten, terminated)
+        reward = self._calculate_reward(old_score, ghost_collision, ghost_eaten, terminated)
         obs = self._flatten_observation(self._get_obs())
         
         return obs, reward, terminated, truncated, self._get_info()
@@ -214,19 +159,22 @@ class PacmanEnv(gym.Env):
         
             ghosts_legal_moves[i][4] = ghost.type.value
         
-        ghosts_data = np.zeros((4, 5), dtype=np.int32)
-        ghost_distances = np.zeros((4,2), dtype=np.float32)
+        ghosts_data = np.zeros((4, 6), dtype=np.float32)
         
         for i, ghost in enumerate(self.ghosts):
             frightened_timer = max(0, 7000 - (self.current_time - ghost.last_state_change)) if ghost.state == GhostState.FRIGHTENED else 0
-            ghosts_data[i] = [ghost.gridX, ghost.gridY, ghost.type.value, ghost.state.value, frightened_timer]
             
             manhattan_dist = abs(ghost.gridX - self.pacman.gridX) + abs(ghost.gridY - self.pacman.gridY)
             max_possible_dist = self.game_map.width + self.game_map.height
+            normalized_dist = min(1.0, manhattan_dist / max_possible_dist)
             
-            ghost_distances[i] = [
-                min(1.0, manhattan_dist / max_possible_dist),
-                ghost.type.value
+            ghosts_data[i] = [
+                ghost.gridX,
+                ghost.gridY,
+                ghost.type.value,
+                ghost.state.value,
+                frightened_timer,
+                normalized_dist
             ]
         
         power_pellets = np.zeros((4, 2), dtype=np.int32)
@@ -258,61 +206,19 @@ class PacmanEnv(gym.Env):
         for i in range(min(2, len(power_pellet_distances))):
             nearest_power_pellets[i] = power_pellet_distances[i]
         
-        
-        lives = np.array([self.lives], dtype=np.int32)
         dots_left = np.array([len(self.dots)], dtype=np.int32)
         dots_eaten_percentage = np.array([1 - len(self.dots) / self.total_initial_dots], dtype=np.float32)
-        
-        chasing_ghost_one_step_away = np.array([0], dtype=np.int32)
-        chasing_ghost_two_steps_away = np.array([0], dtype=np.int32)
-        scatter_ghost_one_step_away = np.array([0], dtype=np.int32)
-        scatter_ghost_two_steps_away = np.array([0], dtype=np.int32)
-        frightened_ghost_one_step_away = np.array([0], dtype=np.int32)
-        frightened_ghost_two_steps_away = np.array([0], dtype=np.int32)
-        
-        for ghost in self.ghosts:
-            manhattan_dist = abs(ghost.gridX - self.pacman.gridX) + abs(ghost.gridY - self.pacman.gridY)
-            
-            if ghost.state == GhostState.CHASE:
-                if manhattan_dist <= 1:
-                    chasing_ghost_one_step_away[0] = 1
-                elif manhattan_dist <= 2:
-                    chasing_ghost_two_steps_away[0] = 1
-            elif ghost.state == GhostState.SCATTER:
-                if manhattan_dist <= 1:
-                    scatter_ghost_one_step_away[0] = 1
-                elif manhattan_dist <= 2:
-                    scatter_ghost_two_steps_away[0] = 1
-            elif ghost.state == GhostState.FRIGHTENED:
-                if manhattan_dist <= 1:
-                    frightened_ghost_one_step_away[0] = 1
-                elif manhattan_dist <= 2:
-                    frightened_ghost_two_steps_away[0] = 1
         
         return {
             'pacman': pacman_pos,
             'ghosts': ghosts_data,
             'power_pellets': power_pellets,
-
             'nearest_dots': nearest_dots,
             'nearest_power_pellets': nearest_power_pellets,
-            'ghost_distances': ghost_distances,
-
             'dots_left': dots_left,
             'dots_eaten_percentage': dots_eaten_percentage,
-            'lives': lives,
-
-            'chasing_ghost_one_step_away': chasing_ghost_one_step_away,
-            'chasing_ghost_two_steps_away': chasing_ghost_two_steps_away,
-
-            'scatter_ghost_one_step_away': scatter_ghost_one_step_away,
-            'scatter_ghost_two_steps_away': scatter_ghost_two_steps_away,
-
-            'frightened_ghost_one_step_away': frightened_ghost_one_step_away,
-            'frightened_ghost_two_steps_away': frightened_ghost_two_steps_away,
-
             'pacman_legal_moves': pacman_legal_moves,
-            'ghosts_legal_moves': ghosts_legal_moves,
+            'ghost_legal_moves': ghosts_legal_moves,
         }
         
     def _get_game_state(self):
@@ -344,11 +250,9 @@ class PacmanEnv(gym.Env):
                 if dot.type == CellType.Dot:
                     self.score += 10
                     dot_eaten = True
-                    self.last_dot_eaten_time = self.current_time
                 else:
                     self.score += 50
                     pellet_eaten = True
-                    self.last_pellet_eaten_time = self.current_time
                     self.ghost_streak = 200
                     for ghost in self.ghosts:
                         ghost.enter_frightened_state(self.current_time)
@@ -377,53 +281,34 @@ class PacmanEnv(gym.Env):
                 if ghost.is_frightened():
                     self.score += self.ghost_streak
                     self.ghost_streak *= 2
-                    self.last_ghost_eaten_time = self.current_time
                     ghost.on_eaten(self.current_time)
                     ghost_eaten = True
                 else:
-                    self.lives -= 1
-                    if self.lives <= 0:
-                        self.game_over = True
-                        self.pacman.set_game_over()
-                        for g in self.ghosts:
-                            g.set_game_over()
-                    else:
-                        self.pacman = Pacman(self.game_map, 9, 15, 20)
-                        self.ghosts = [
-                            Blinky(9, 8, self.game_map, 20),
-                            Clyde(8, 9, self.game_map, 20),
-                            Inky(10, 9, self.game_map, 20),
-                            Pinky(9, 9, self.game_map, 20)
-                        ]
+                    self.game_over = True
+                    self.pacman.set_game_over()
+                    for g in self.ghosts:
+                        g.set_game_over()
         
         return ghost_collision, ghost_eaten
     
-    def _calculate_reward(self, dots_before, ghost_collision, ghost_eaten, terminated):
-        reward = 0
+    def _calculate_reward(self, old_score, ghost_collision, ghost_eaten, terminated):
+        reward = np.log2(max(1, old_score))
+        delta = max(self.score - old_score, 0)
         
-        dots_eaten = dots_before - len(self.dots)
+        reward += delta
+        if delta == 0:
+            reward -= 5
+        elif len(self.dots) == 0:
+            reward += 250
         
-        if dots_eaten > 0:
-            reward += dots_eaten * 10
-        else:
-            reward -= 0.1
-        
-        closest_food_dist = float('inf')
-        for dot in self.dots:
-            dist = abs(dot.gridX - self.pacman.gridX) + abs(dot.gridY - self.pacman.gridY)
-            closest_food_dist = min(closest_food_dist, dist)
-        
-        if closest_food_dist != float('inf'):
-            reward += 1.0 / max(1, closest_food_dist)
-        
-        if ghost_collision:
-            if ghost_eaten:
-                reward += 100
-            else:
-                reward -= 250
-    
-        if terminated and len(self.dots) == 0:
-            reward += 500
+        # Penalize being close to chasing ghosts
+        # Encourage chasing frightened ghosts
+        for ghost in self.ghosts:
+            ghost_dist = abs(ghost.gridX - self.pacman.gridX) + abs(ghost.gridY - self.pacman.gridY)
+            if ghost.state == GhostState.CHASE and ghost_dist < 3:
+                reward -= (3 - ghost_dist) * 2
+            elif ghost.state == GhostState.FRIGHTENED and ghost_dist < 8:
+                reward += (8 - ghost_dist) * 3    
         
         return reward
     
@@ -433,6 +318,5 @@ class PacmanEnv(gym.Env):
             "ghosts": [[ghost.gridX, ghost.gridY, ghost.type.value] for ghost in self.ghosts],
             "timestamp": self.current_time,
             "game_over": self.game_over,
-            "lives": self.lives,
             "score": self.score,
         }

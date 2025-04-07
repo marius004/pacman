@@ -78,7 +78,7 @@ export abstract class Ghost extends Character {
             }
         }
 
-        if (!this.isValidPosition(this.gridX + this.direction.x, this.gridY + this.direction.y)) {
+        if (!this.simulationMode && !this.isValidPosition(this.gridX + this.direction.x, this.gridY + this.direction.y)) {
             this.direction = this.getValidRandomDirection();
         }
 
@@ -109,7 +109,6 @@ export abstract class Ghost extends Character {
         this.gridX = GHOST_RESPAWN_POINT[this.type].x;
         this.gridY = GHOST_RESPAWN_POINT[this.type].y;
         
-        // ghosts must wait a little bit before leaving
         setTimeout(() => {
             this.exitedRoom = false;
         }, GHOST_RESPAWN_TIME[this.type]);
@@ -181,9 +180,8 @@ export abstract class Ghost extends Character {
         const validDirections = 
             POSSIBLE_DIRECTIONS.filter(({x, y}) => this.isValidPosition(this.gridX + x, this.gridY + y));
         
-        return validDirections.length > 0 
-            ? validDirections[Math.floor(Math.random() * validDirections.length)]
-            : this.direction;
+        const directionIndex = this.getRandomInteger(0, validDirections.length);
+        return validDirections.length > 0 ? validDirections[directionIndex] : this.direction;
     }
 
     protected abstract selectChaseDirection(gameState: GameState): Direction;
@@ -288,5 +286,12 @@ export abstract class Ghost extends Character {
             y = py;
         }
         return this.getValidRandomDirection();
+    }
+
+    private getRandomInteger(a: number, b: number): number {
+        const seed = 31 * this.gridX + this.gridY;
+        
+        const pseudoRandom = Math.abs(Math.sin(seed) * 10000);
+        return a + Math.floor(pseudoRandom % (b - a));
     }
 }

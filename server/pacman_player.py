@@ -18,12 +18,12 @@ class PacmanPlayer:
 
         for _ in range(num_episodes):
             obs, info = self.eval_env.reset()
-            done = False
+            done, terminated = False, False
             episode_result = [info]
 
-            while not done:
+            while not done and not terminated:
                 action, _ = self.model.predict(obs, deterministic=True)
-                obs, _, done, _, info = self.eval_env.step(action)
+                obs, _, done, terminated, info = self.eval_env.step(action)
                 episode_result.append(info)
 
             results.append(episode_result)
