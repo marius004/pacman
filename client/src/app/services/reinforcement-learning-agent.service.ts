@@ -18,4 +18,8 @@ export class ReinforcementLearningAgentService {
   getEpisode(agent: string, checkpoint: number = 0): Observable<EpisodeSample[]> {
     return this.http.get<EpisodeSample[]>(`${this.apiUrl}/${agent}/${checkpoint}`);
   }
+
+  getPlot(agent: string, plotIndex: number) {
+    return `${this.apiUrl}/plots/${agent}/${plotIndex}`
+  }
 }

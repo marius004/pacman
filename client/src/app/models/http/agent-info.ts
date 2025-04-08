@@ -1,5 +1,7 @@
 export interface AgentInfo {
-    model_name: string;
+    plots: number; 
     checkpoints: number;
+    
+    model_name: string;
     description: Record<string, any>;
 }

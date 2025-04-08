@@ -12,7 +12,6 @@ vec_env = make_vec_env(lambda: PacmanEnv(), n_envs=4)
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 models = [
-
     {
         "model": DQN(
             "MlpPolicy",
@@ -39,7 +38,7 @@ os.makedirs(os.path.join(model_conf['path'], model_conf['name']), exist_ok=True)
 
 trainer = PacmanTrainer(
     model=model_conf['model'],
-    total_timesteps=250_000,
+    total_timesteps=10_000,
     model_name=model_conf["name"],
     path=os.path.join(model_conf["path"], model_conf["name"])
 )

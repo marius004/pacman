@@ -45,6 +45,19 @@
           <strong>Description:</strong>
           <pre>{{formatDescription(selectedAgent?.description)}}</pre>
         </div>
+        <div class="plots-slider" *ngIf="selectedAgent && selectedAgent.plots && selectedAgent.plots > 0">
+          <h3>Training Plots</h3>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <button class="nav-button prev" (click)="prevPlot()" [disabled]="currentPlotIndex === 0">❮</button>
+              <div class="plot-image-container">
+                <img [src]="getPlotImageUrl()" [alt]="'Training plot ' + (currentPlotIndex + 1)">
+                <div class="plot-counter" *ngIf="selectedAgent.plots">{{currentPlotIndex + 1}}/{{selectedAgent.plots}}</div>
+              </div>
+              <button class="nav-button next" (click)="nextPlot()" [disabled]="!selectedAgent.plots || currentPlotIndex >= selectedAgent.plots - 1">❯</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     

@@ -59,10 +59,12 @@ export class SimulationComponent implements OnInit, OnDestroy {
   dots: Dot[] = [];
   pacman!: Pacman;
 
+  currentCheckpoint: number = 0;
+  currentPlotIndex: number = 0;
+
   selectedAgent: AgentInfo | null = null;
   checkpointsLoaded: boolean = false;
   agentList: AgentInfo[] = [];
-  currentCheckpoint: number = 0;
 
   ngOnInit(): void {
     if (!this.gameMap) {
@@ -424,6 +426,23 @@ export class SimulationComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.error('Error formatting description:', error);
       return '{}';
+    }
+  }
+
+  getPlotImageUrl(): string {
+    if (!this.selectedAgent) return '';
+    return this.rlAgentService.getPlot(this.selectedAgent.model_name, this.currentPlotIndex);
+  }
+
+  nextPlot(): void {
+    if (this.selectedAgent && this.currentPlotIndex < this.selectedAgent.plots - 1) {
+      this.currentPlotIndex++;
+    }
+  }
+  
+  prevPlot(): void {
+    if (this.currentPlotIndex > 0) {
+      this.currentPlotIndex--;
     }
   }
 }

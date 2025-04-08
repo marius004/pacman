@@ -1,4 +1,5 @@
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi import FastAPI, HTTPException
 from pacman_player import PacmanPlayer
 
@@ -29,6 +30,7 @@ def list_trained_agents():
         for model in os.listdir(algo_path):
             model_path = os.path.join(algo_path, model)
             ckpt_path = os.path.join(model_path, "checkpoints")
+            plots_path = os.path.join(model_path, "plots")
 
             if not os.path.isdir(ckpt_path):
                 continue
@@ -49,14 +51,33 @@ def list_trained_agents():
                         description = json.load(f)
                     except json.JSONDecodeError:
                         description = ""
+                        
+            num_plots = 0
+            if os.path.isdir(plots_path):
+                num_plots = len([f for f in os.listdir(plots_path) if f.endswith(".png")])
 
             agents.append({
                 "model_name": f"{algo}/{model}",
                 "checkpoints": len(checkpoint_files),
-                "description": description
+                "description": description,
+                "plots": num_plots,
             })
 
     return agents
+
+@app.get("/plots/{agent}/{model_name}/{plot_index}")
+def get_plot(agent: str, model_name: str, plot_index: int):
+    plots_dir = os.path.join("agents", agent, model_name, "plots")
+
+    if not os.path.exists(plots_dir):
+        raise HTTPException(status_code=404, detail=f"Plots directory not found for model {model_name}")
+
+    plot_files = sorted([f for f in os.listdir(plots_dir) if f.endswith(".png")])
+    if not plot_files or plot_index >= len(plot_files):
+        raise HTTPException(status_code=404, detail=f"Plot index {plot_index} out of range")
+
+    plot_path = os.path.join(plots_dir, plot_files[plot_index])
+    return FileResponse(plot_path, media_type="image/png")
 
 @app.get("/{agent}/{model_name}/{checkpoint}")
 def get_agent_results(agent: str, model_name: str, checkpoint: int):

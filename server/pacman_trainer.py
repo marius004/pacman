@@ -1,6 +1,7 @@
 from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback
 from stable_baselines3.common.env_util import make_vec_env
 from gymnasium.wrappers import FlattenObservation
+from plotting_callback import PlottingCallback 
 from pacman_env import PacmanEnv
 
 import numpy as np
@@ -36,9 +37,11 @@ class PacmanTrainer:
             verbose=1
         )
         
+        plotting_callback = PlottingCallback(os.path.join(self.path, "plots"))
+        
         self.model.learn(
             total_timesteps=self.total_timesteps,
-            callback=[eval_callback, checkpoint_callback],
+            callback=[eval_callback, checkpoint_callback, plotting_callback],
             progress_bar=True,
             log_interval=100
         )
