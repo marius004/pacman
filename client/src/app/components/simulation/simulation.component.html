@@ -51,7 +51,9 @@
             <div class="slider-wrapper">
               <button class="nav-button prev" (click)="prevPlot()" [disabled]="currentPlotIndex === 0">❮</button>
               <div class="plot-image-container">
-                <img [src]="getPlotImageUrl()" [alt]="'Training plot ' + (currentPlotIndex + 1)">
+                <a [href]="getPlotImageUrl()" target="_blank">
+                  <img [src]="getPlotImageUrl()" [alt]="'Training plot ' + (currentPlotIndex + 1)">
+                </a>
                 <div class="plot-counter" *ngIf="selectedAgent.plots">{{currentPlotIndex + 1}}/{{selectedAgent.plots}}</div>
               </div>
               <button class="nav-button next" (click)="nextPlot()" [disabled]="!selectedAgent.plots || currentPlotIndex >= selectedAgent.plots - 1">❯</button>
