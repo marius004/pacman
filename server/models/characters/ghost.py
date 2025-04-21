@@ -19,23 +19,18 @@ class GhostState(Enum):
     CHASE = 2
 
 class Ghost:
-    def __init__(self, ghost_type: GhostType, x: int, y: int, game_map: GameMap, cell_size: int):
+    def __init__(self, ghost_type: GhostType, x: int, y: int, game_map: GameMap):
         self.state = GhostState.SCATTER
         self.type = ghost_type
         
-        self.cell_size = cell_size
         self.is_game_over = False
         self.game_map = game_map
         
         self.gridX = x
         self.gridY = y
         
-        self.displayX = x * cell_size
-        self.displayY = y * cell_size
-        
         self.next_direction = Direction(0, 0)
         self.direction = Direction(0, 0)
-        self.is_moving = False
         
         self.move_interval = 225 * 1.3
         self.last_state_change = 0
@@ -49,9 +44,9 @@ class Ghost:
         if self.is_game_over:
             return
         
-        if not self._update_position(current_time):
-            return
-        
+        if current_time - self.last_move_time < self.move_interval:
+            return 
+            
         self._handle_state_transition(current_time)
         self._update_speed(current_time)
         self._check_door_exit()
@@ -59,26 +54,6 @@ class Ghost:
         self._determine_move_direction(game_state)
         
         self._move_ghost(current_time)
-    
-    def _update_position(self, current_time: int) -> bool:
-        if self.is_game_over:
-            return False
-        
-        targetX = self.gridX * self.cell_size
-        targetY = self.gridY * self.cell_size
-        
-        self.is_moving = (
-            abs(self.displayX - targetX) > 0.1 or 
-            abs(self.displayY - targetY) > 0.1 or 
-            (self.direction.x != 0 or self.direction.y != 0)
-        )
-        
-        if current_time - self.last_move_time < self.move_interval:
-            self.displayX += (targetX - self.displayX) * 0.1
-            self.displayY += (targetY - self.displayY) * 0.1
-            return False
-            
-        return True
     
     def _check_door_exit(self):
         if self.game_map.get_cell(self.gridX, self.gridY) == CellType.Door:
@@ -230,6 +205,7 @@ class Ghost:
         
         direction_index = self.get_random_integer(0, len(valid_directions))
         return valid_directions[direction_index] if valid_directions else self.direction
+        # return np.random.choice(valid_directions) if valid_directions else self.direction
         
     def _select_chase_direction(self, game_state: dict) -> Direction:
         return self._get_valid_random_direction()
@@ -240,6 +216,7 @@ class Ghost:
     
     def on_eaten(self, current_time: int):
         self.last_state_change = current_time
+        self.last_move_time = current_time
         self.state = GhostState.SCATTER
         
         respawn_points = {
@@ -267,8 +244,8 @@ class Ghost:
 
 
 class Blinky(Ghost):
-    def __init__(self, x: int, y: int, game_map: GameMap, cell_size: int):
-        super().__init__(GhostType.BLINKY, x, y, game_map, cell_size)
+    def __init__(self, x: int, y: int, game_map: GameMap):
+        super().__init__(GhostType.BLINKY, x, y, game_map)
     
     def _select_chase_direction(self, game_state: dict) -> Direction:
         pacman_pos = game_state['pacman_position']
@@ -276,8 +253,8 @@ class Blinky(Ghost):
 
 
 class Pinky(Ghost):
-    def __init__(self, x: int, y: int, game_map: GameMap, cell_size: int):
-        super().__init__(GhostType.PINKY, x, y, game_map, cell_size)
+    def __init__(self, x: int, y: int, game_map: GameMap):
+        super().__init__(GhostType.PINKY, x, y, game_map)
     
     def _select_chase_direction(self, game_state: dict) -> Direction:
         pacman_pos = game_state['pacman_position']
@@ -285,8 +262,8 @@ class Pinky(Ghost):
 
 
 class Inky(Ghost):
-    def __init__(self, x: int, y: int, game_map: GameMap, cell_size: int):
-        super().__init__(GhostType.INKY, x, y, game_map, cell_size)
+    def __init__(self, x: int, y: int, game_map: GameMap):
+        super().__init__(GhostType.INKY, x, y, game_map)
     
     def _select_chase_direction(self, game_state: dict) -> Direction:
         pacman_pos = game_state['pacman_position']
@@ -304,8 +281,8 @@ class Inky(Ghost):
 
 
 class Clyde(Ghost):
-    def __init__(self, x: int, y: int, game_map: GameMap, cell_size: int):
-        super().__init__(GhostType.CLYDE, x, y, game_map, cell_size)
+    def __init__(self, x: int, y: int, game_map: GameMap):
+        super().__init__(GhostType.CLYDE, x, y, game_map)
     
     def _select_chase_direction(self, game_state: dict) -> Direction:
         pacman_pos = game_state['pacman_position']

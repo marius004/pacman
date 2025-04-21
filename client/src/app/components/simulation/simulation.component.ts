@@ -61,6 +61,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
 
   currentCheckpoint: number = 0;
   currentPlotIndex: number = 0;
+  currentScore: number = 0;
 
   selectedAgent: AgentInfo | null = null;
   checkpointsLoaded: boolean = false;
@@ -95,10 +96,6 @@ export class SimulationComponent implements OnInit, OnDestroy {
     this.stopGameLoop();
     
     if (this.gameOverSubscription) this.gameOverSubscription.unsubscribe();
-  }
-
-  get score$(): Observable<number> {
-    return this.gameService.score$;
   }
 
   startSimulation(): void {
@@ -288,12 +285,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
 
   private checkGhostCollision(currentTime: number): void {
     this.ghosts.forEach(ghost => {
-      const gridCollision =
-        Math.round(this.pacman.gridX) === Math.round(ghost.gridX) &&
-        Math.round(this.pacman.gridY) === Math.round(ghost.gridY);
-      const physicalCollision = this.checkPhysicalCollision(ghost);
-
-      if ((gridCollision || physicalCollision) && !this.isTransitioning && !this.gameService.isGameOver) {
+      if (this.pacman.gridX === ghost.gridX && this.pacman.gridY == ghost.gridY) {
         if (ghost.isFrightened()) {
           this.gameService.eatGhost();
           ghost.onEaten(currentTime);
@@ -303,14 +295,6 @@ export class SimulationComponent implements OnInit, OnDestroy {
         }
       }
     });
-  }
-
-  private checkPhysicalCollision(ghost: Ghost): boolean {
-    const dx = (this.pacman.displayX + this.cellSize / 2) - (ghost.displayX + this.cellSize / 2);
-    const dy = (this.pacman.displayY + this.cellSize / 2) - (ghost.displayY + this.cellSize / 2);
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    return distance < this.cellSize / 2;
   }
 
   private render(currentTime: number): void {
@@ -366,11 +350,11 @@ export class SimulationComponent implements OnInit, OnDestroy {
 
   private updateGameState(currentTime: number): void {
     if (this.gameService.isGameOver && !this.isTransitioning) return;
-
+    
     if (this.episodeSamples.length > 0 && this.currentSampleIndex < this.episodeSamples.length) {
       if (currentTime - this.lastMoveTime >= this.MOVE_DELAY_MS) {
         const sample = this.episodeSamples[this.currentSampleIndex];
-  
+
         this.pacman.nextDirection = {
           x: sample.pacman[0] - this.pacman.gridX,
           y: sample.pacman[1] - this.pacman.gridY
@@ -386,8 +370,12 @@ export class SimulationComponent implements OnInit, OnDestroy {
           }
         });
   
-        this.currentSampleIndex++;
+        this.ngZone.run(() => {
+          this.currentScore = sample.score;
+        });
+
         this.lastMoveTime = currentTime;
+        this.currentSampleIndex++;
       }
     }
   

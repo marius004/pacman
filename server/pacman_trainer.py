@@ -23,7 +23,7 @@ class PacmanTrainer:
     def train(self):
         eval_callback = EvalCallback(
             self.eval_env,
-            eval_freq=5_000,
+            eval_freq=20_000,
             best_model_save_path=self.path,
             verbose=1,
             n_eval_episodes=100,
@@ -31,7 +31,7 @@ class PacmanTrainer:
         )
         
         checkpoint_callback = CheckpointCallback(
-            save_freq=20_000,
+            save_freq=60_000,
             save_path=os.path.join(self.path, "checkpoints"),
             name_prefix="model",
             verbose=1

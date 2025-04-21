@@ -16,8 +16,7 @@
   <!-- Game Interface -->
   <div class="game-view" *ngIf="gameStarted">
     <div class="status-bar">
-      <div class="score">Score: {{ score$ | async }}</div>
-
+      <div class="score">Score: {{ currentScore }}</div>
       <div class="checkpoint-status" *ngIf="checkpointsLoaded && selectedAgent">
         Checkpoint: {{ currentCheckpoint + 1 }}/{{ selectedAgent.checkpoints }}
       </div>
@@ -67,7 +66,7 @@
       <div class="modal-backdrop">
         <div class="modal" (click)="$event.stopPropagation()">
           <h2>Game Over!</h2>
-          <p *ngIf="score$ | async as score">Final Score: {{ score }}</p>
+          <p>Final Score: {{ currentScore }}</p>
           <p *ngIf="selectedAgent && currentCheckpoint < selectedAgent.checkpoints - 1">
             Loading next checkpoint in 2 seconds...
           </p>

@@ -58,7 +58,7 @@ def list_trained_agents():
 
             agents.append({
                 "model_name": f"{algo}/{model}",
-                "checkpoints": len(checkpoint_files),
+                "checkpoints": len(checkpoint_files) + 2,
                 "description": description,
                 "plots": num_plots,
             })
@@ -86,26 +86,39 @@ def get_agent_results(agent: str, model_name: str, checkpoint: int):
     if not os.path.exists(model_base_path):
         raise HTTPException(status_code=404, detail=f"Model {model_name} not found")
 
+    files = []
+
+    best_model_path = os.path.join(model_base_path, "best_model.zip")
+    if os.path.exists(best_model_path):
+        files.append(best_model_path)
+    else:
+        files.append(None)
+
+    model_zip_path = os.path.join(model_base_path, f"{model_name}.zip")
+    if os.path.exists(model_zip_path):
+        files.append(model_zip_path)
+    else:
+        files.append(None)
+
     checkpoints_dir = os.path.join(model_base_path, "checkpoints")
-    if not os.path.exists(checkpoints_dir):
-        raise HTTPException(status_code=404, detail=f"No checkpoints directory found for model {model_name}")
+    if os.path.exists(checkpoints_dir):
+        pattern = re.compile(r"model_(\d+)_steps\.zip")
+        checkpoints = []
 
-    checkpoints = []
-    pattern = re.compile(r"model_(\d+)_steps\.zip")
-    
-    for filename in os.listdir(checkpoints_dir):
-        match = pattern.match(filename)
-        if match:
-            steps = int(match.group(1))
-            checkpoints.append((steps, filename))
+        for filename in os.listdir(checkpoints_dir):
+            match = pattern.match(filename)
+            if match:
+                steps = int(match.group(1))
+                checkpoints.append((steps, os.path.join(checkpoints_dir, filename)))
 
-    if not checkpoints or checkpoint >= len(checkpoints):
+        checkpoints.sort(key=lambda x: x[0])
+        files.extend([path for _, path in checkpoints])
+
+    if checkpoint >= len(files) or files[checkpoint] is None:
         raise HTTPException(status_code=404, detail=f"Checkpoint {checkpoint} not found for model {model_name}")
-    
-    checkpoints.sort(key=lambda x: x[0])
-    _, checkpoint_file = checkpoints[checkpoint]
 
-    player = PacmanPlayer(os.path.join(checkpoints_dir, checkpoint_file))
+    model_file_path = files[checkpoint]
+    player = PacmanPlayer(model_file_path)
     return player.play()
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-import {Subject, fromEvent, takeUntil, debounceTime, map} from 'rxjs';
+import {Subject, fromEvent, takeUntil, debounceTime, map, Observable} from 'rxjs';
 import {GAME_MAP, GhostPosition} from '@models/interfaces';
 import {GameMap} from '@models/map/game-map';
 import {CommonModule} from '@angular/common';
@@ -69,8 +69,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     cancelAnimationFrame(this.animationFrame);
   }
 
-  get score$() {
-    return this.gameService.score$.pipe(map(score => score ?? 0));
+  get score$(): Observable<number> {
+    return this.gameService.score$;
   }
 
   restartGame(): void {
@@ -184,13 +184,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private checkGhostCollision(currentTime: number): void {
-    this.ghosts.forEach(ghost => {
-      const gridCollision =
-        Math.round(this.pacman.gridX) === Math.round(ghost.gridX) &&
-        Math.round(this.pacman.gridY) === Math.round(ghost.gridY);
-      const physicalCollision = this.checkPhysicalCollision(ghost);
-      
-      if (gridCollision || physicalCollision) {
+    this.ghosts.forEach(ghost => { 
+      if (this.pacman.gridX === ghost.gridX && this.pacman.gridY === ghost.gridY) {
         if (ghost.isFrightened()) {
           this.gameService.eatGhost();
           ghost.onEaten(currentTime);
@@ -199,14 +194,6 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     });
-  }
-
-  private checkPhysicalCollision(ghost: Ghost): boolean {
-    const dx = (this.pacman.displayX + this.cellSize/2) - (ghost.displayX + this.cellSize/2);
-    const dy = (this.pacman.displayY + this.cellSize/2) - (ghost.displayY + this.cellSize/2);
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    return distance < this.cellSize / 2;
   }
 
   private render(currentTime: number): void {

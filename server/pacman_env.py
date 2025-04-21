@@ -5,6 +5,7 @@ from models.characters.ghost import GhostState
 from models.characters.pacman import Pacman
 from models.map.game_map import GameMap
 
+from collections import deque
 from gymnasium import spaces
 from copy import deepcopy
 
@@ -30,12 +31,11 @@ class PacmanEnv(gym.Env):
                 dtype=np.float32
             ),
             
-            # Power pellet positions [x, y]  
-            'power_pellets': spaces.Box(low=0, high=19, shape=(4,2), dtype=np.int32),
+            # Power pellet positions [x, y, normalized_distance]  
+            'power_pellets': spaces.Box(low=0, high=19, shape=(4,3), dtype=np.float32),
             
-            # Closest dots/power pellets to Pac-Man [x, y, dist]   
+            # Closest dots to Pac-Man [x, y, dist]   
             'nearest_dots': spaces.Box(low=0, high=19, shape=(4,3), dtype=np.int32),
-            'nearest_power_pellets': spaces.Box(low=0, high=19, shape=(2,3), dtype=np.int32),
             
             # Remaining dots and percentage of dots eaten  
             'dots_left': spaces.Box(low=0, high=240, shape=(1,), dtype=np.int32),
@@ -62,7 +62,7 @@ class PacmanEnv(gym.Env):
     
     def reset(self, **kwargs):
         self.game_map = GameMap(deepcopy(GAME_MAP))
-        self.pacman = Pacman(self.game_map, 9, 15, 20)
+        self.pacman = Pacman(self.game_map, 9, 15)
         
         self.total_initial_dots = sum([
             self.game_map.get_cell(i, j) in [CellType.Dot, CellType.PowerPellet]
@@ -71,10 +71,10 @@ class PacmanEnv(gym.Env):
         ])
         
         self.ghosts = [
-            Blinky(9, 8, self.game_map, 20),
-            Clyde(8, 9, self.game_map, 20),
-            Inky(10, 9, self.game_map, 20),
-            Pinky(9, 9, self.game_map, 20)
+            Blinky(9, 8, self.game_map),
+            Clyde(8, 9, self.game_map),
+            Inky(10, 9, self.game_map),
+            Pinky(9, 9, self.game_map)
         ]
         
         self.dots = self.game_map.get_dots()
@@ -83,6 +83,13 @@ class PacmanEnv(gym.Env):
 
         self.ghost_streak = 200
         self.current_time = 0
+        
+        # Store previous position for position change penalty
+        self.prev_pacman_pos = (self.pacman.gridX, self.pacman.gridY)
+        
+        # For detecting oscillation
+        self.position_history = deque(maxlen=8)  # Track the last 6 positions
+        self.action_history = deque(maxlen=8)    # Track the last 6 actions
         
         return self._flatten_observation(self._get_obs()), self._get_info()
     
@@ -96,11 +103,20 @@ class PacmanEnv(gym.Env):
         old_score = self.score
         dots_before = len(self.dots)
         
+        # Store previous position for position change penalty
+        self.prev_pacman_pos = (self.pacman.gridX, self.pacman.gridY)
+        
+        # Add current action to history
+        self.action_history.append(action)
+        
         if 0 <= action < len(DIRECTION_MAP):
             self.pacman.next_direction = DIRECTION_MAP[action]
         
         self.current_time += 225
         self.pacman.update(self.current_time)
+        
+        # Add new position to history
+        self.position_history.append((self.pacman.gridX, self.pacman.gridY))
         
         game_state = self._get_game_state()
         for ghost in self.ghosts:
@@ -117,14 +133,17 @@ class PacmanEnv(gym.Env):
         # Reset level if completed
         if level_completed:
             self.game_map = GameMap(deepcopy(GAME_MAP))
-            self.pacman = Pacman(self.game_map, 9, 15, 20)
+            self.pacman = Pacman(self.game_map, 9, 15)
             self.ghosts = [
-                Blinky(9, 8, self.game_map, 20),
-                Clyde(8, 9, self.game_map, 20),
-                Inky(10, 9, self.game_map, 20),
-                Pinky(9, 9, self.game_map, 20)
+                Blinky(9, 8, self.game_map),
+                Clyde(8, 9, self.game_map),
+                Inky(10, 9, self.game_map),
+                Pinky(9, 9, self.game_map)
             ]
             self.dots = self.game_map.get_dots()
+            self.prev_pacman_pos = (self.pacman.gridX, self.pacman.gridY)
+            self.position_history.clear()
+            self.action_history.clear()
         
         reward = self._calculate_reward(old_score, ghost_collision, ghost_eaten, terminated)
         obs = self._flatten_observation(self._get_obs())
@@ -177,34 +196,29 @@ class PacmanEnv(gym.Env):
                 normalized_dist
             ]
         
-        power_pellets = np.zeros((4, 2), dtype=np.int32)
+        power_pellets = np.zeros((4, 3), dtype=np.float32)
         power_pellet_count = 0
+        max_possible_dist = self.game_map.width + self.game_map.height
         
         for dot in self.dots:
             if dot.type == CellType.PowerPellet and power_pellet_count < 4:
-                power_pellets[power_pellet_count] = [dot.gridX, dot.gridY]
+                manhattan_dist = abs(dot.gridX - self.pacman.gridX) + abs(dot.gridY - self.pacman.gridY)
+                normalized_dist = min(1.0, manhattan_dist / max_possible_dist)
+                power_pellets[power_pellet_count] = [dot.gridX, dot.gridY, normalized_dist]
                 power_pellet_count += 1
         
         dot_distances = []
-        power_pellet_distances = []
         
         for dot in self.dots:
-            manhattan_dist = abs(dot.gridX - self.pacman.gridX) + abs(dot.gridY - self.pacman.gridY)
             if dot.type == CellType.Dot:
+                manhattan_dist = abs(dot.gridX - self.pacman.gridX) + abs(dot.gridY - self.pacman.gridY)
                 dot_distances.append((dot.gridX, dot.gridY, manhattan_dist))
-            else:
-                power_pellet_distances.append((dot.gridX, dot.gridY, manhattan_dist))
         
         dot_distances.sort(key=lambda x: x[2])
-        power_pellet_distances.sort(key=lambda x: x[2])
         
         nearest_dots = np.zeros((4, 3), dtype=np.int32)
         for i in range(min(4, len(dot_distances))):
             nearest_dots[i] = dot_distances[i]
-        
-        nearest_power_pellets = np.zeros((2, 3), dtype=np.int32)
-        for i in range(min(2, len(power_pellet_distances))):
-            nearest_power_pellets[i] = power_pellet_distances[i]
         
         dots_left = np.array([len(self.dots)], dtype=np.int32)
         dots_eaten_percentage = np.array([1 - len(self.dots) / self.total_initial_dots], dtype=np.float32)
@@ -214,7 +228,6 @@ class PacmanEnv(gym.Env):
             'ghosts': ghosts_data,
             'power_pellets': power_pellets,
             'nearest_dots': nearest_dots,
-            'nearest_power_pellets': nearest_power_pellets,
             'dots_left': dots_left,
             'dots_eaten_percentage': dots_eaten_percentage,
             'pacman_legal_moves': pacman_legal_moves,
@@ -267,17 +280,7 @@ class PacmanEnv(gym.Env):
         ghost_eaten = False
         
         for ghost in self.ghosts:
-            grid_collision = (
-                round(self.pacman.gridX) == round(ghost.gridX) and
-                round(self.pacman.gridY) == round(ghost.gridY))
-            
-            dx = (self.pacman.displayX + self.pacman.cell_size/2) - (ghost.displayX + ghost.cell_size/2)
-            dy = (self.pacman.displayY + self.pacman.cell_size/2) - (ghost.displayY + ghost.cell_size/2)
-            distance = np.sqrt(dx*dx + dy*dy)
-            physical_collision = distance < self.pacman.cell_size / 2
-            
-            if grid_collision or physical_collision:
-                ghost_collision = True
+            if (self.pacman.gridX == ghost.gridX and self.pacman.gridY == ghost.gridY):
                 if ghost.is_frightened():
                     self.score += self.ghost_streak
                     self.ghost_streak *= 2
@@ -291,13 +294,40 @@ class PacmanEnv(gym.Env):
         
         return ghost_collision, ghost_eaten
     
-    def _calculate_reward(self, old_score, ghost_collision, ghost_eaten, terminated):
-        reward = np.log2(max(1, old_score))
-        delta = max(self.score - old_score, 0)
+    def _is_oscillation(self):
+        if len(self.action_history) < 2:
+            return False
+            
+        opposite_pairs = [(0, 1), (1, 0), (2, 3), (3, 2)]        
+        for oscillation_len in range(2, 9, 2):
+            if oscillation_len > len(self.action_history):
+                return False
+            
+            last_actions = list(self.action_history)[-oscillation_len:]
+            
+            first_half  = last_actions[:oscillation_len // 2]
+            second_half = last_actions[:oscillation_len // 2:]
+            
+            is_oscillation = True
+            for i in range(len(first_half)): 
+                if (first_half[i], second_half[i]) not in opposite_pairs:
+                    is_oscillation = False
+                    break
+                
+            if is_oscillation:
+                return True
         
-        reward += delta
+        return False
+    
+    def _calculate_reward(self, old_score, ghost_collision, ghost_eaten, terminated):
+        delta = max(self.score - old_score, 0)
+        reward = delta
+        
+        if (self.pacman.gridX, self.pacman.gridY) == self.prev_pacman_pos or self._is_oscillation():
+            reward -= 25
+        
         if delta == 0:
-            reward -= 5
+            reward -= 10
         elif len(self.dots) == 0:
             reward += 250
         
@@ -306,9 +336,9 @@ class PacmanEnv(gym.Env):
         for ghost in self.ghosts:
             ghost_dist = abs(ghost.gridX - self.pacman.gridX) + abs(ghost.gridY - self.pacman.gridY)
             if ghost.state == GhostState.CHASE and ghost_dist < 3:
-                reward -= (3 - ghost_dist) * 2
+                reward -= (3 - ghost_dist) * 10
             elif ghost.state == GhostState.FRIGHTENED and ghost_dist < 8:
-                reward += (8 - ghost_dist) * 3    
+                reward += (8 - ghost_dist) * 3
         
         return reward
     

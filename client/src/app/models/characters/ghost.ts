@@ -102,12 +102,15 @@ export abstract class Ghost extends Character {
     }
 
     onEaten(currentTime: number): void {
-        this.lastStateChange = currentTime;
-        this.state = GhostState.SCATTER;
-        this.exitedRoom = true;
-
+        this.direction = {x: 0, y: 0};
+        this.lastMoveTime = currentTime;
+        
         this.gridX = GHOST_RESPAWN_POINT[this.type].x;
         this.gridY = GHOST_RESPAWN_POINT[this.type].y;
+        
+        this.state = GhostState.SCATTER;
+        this.lastStateChange = currentTime;
+        this.exitedRoom = true;
         
         setTimeout(() => {
             this.exitedRoom = false;
@@ -236,14 +239,19 @@ export abstract class Ghost extends Character {
         ctx.fill();
     }
 
-    private handleStateTransition(currentTime: number): void {
+    handleStateTransition(currentTime: number): void {
         const sinceLastChange = currentTime - this.lastStateChange;
-        if (this.state === GhostState.FRIGHTENED && sinceLastChange > 7000) {
-            this.state = GhostState.CHASE;
+        if (this.state === GhostState.FRIGHTENED) {
+            if (sinceLastChange > 7000) {
+                this.lastStateChange = currentTime;
+                this.state = GhostState.CHASE;
+                this.cycleIndex = 0;
+            }
+            return;
         }
-
+    
         if (sinceLastChange > SCATTER_CHASE_CYCLE[this.cycleIndex]) {
-            this.state = this.state == GhostState.SCATTER ? GhostState.CHASE : GhostState.SCATTER;
+            this.state = this.state === GhostState.SCATTER ? GhostState.CHASE : GhostState.SCATTER;
             this.cycleIndex = Math.min(this.cycleIndex + 1, SCATTER_CHASE_CYCLE.length - 1);
             this.lastStateChange = currentTime;
         }
