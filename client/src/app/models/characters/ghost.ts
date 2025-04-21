@@ -53,6 +53,16 @@ export abstract class Ghost extends Character {
         this.type = type;
     }
 
+    updateFromServerData(data: {x: number, y: number, state: number}, currentTime: number): void {
+        const direction = {
+            x: data.x - this.gridX,
+            y: data.y - this.gridY
+        };
+        
+        super.updateFrom(data.x, data.y, direction, currentTime);
+        this.state = data.state;
+    }
+
     update(currentTime: number, gameState: GameState): void {
         if (!this.updatePosition(currentTime)) return;
 

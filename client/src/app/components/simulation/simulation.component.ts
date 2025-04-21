@@ -337,7 +337,6 @@ export class SimulationComponent implements OnInit, OnDestroy {
       this.animationFrame = requestAnimationFrame(gameLoop);
     };
   
-    this.lastMoveTime = performance.now();
     this.animationFrame = requestAnimationFrame(gameLoop);
   }
 
@@ -352,41 +351,49 @@ export class SimulationComponent implements OnInit, OnDestroy {
     if (this.gameService.isGameOver && !this.isTransitioning) return;
     
     if (this.episodeSamples.length > 0 && this.currentSampleIndex < this.episodeSamples.length) {
-      if (currentTime - this.lastMoveTime >= this.MOVE_DELAY_MS) {
-        const sample = this.episodeSamples[this.currentSampleIndex];
+      const sample = this.episodeSamples[this.currentSampleIndex];
+      
+      this.pacman.updateFromServerData(
+        sample.pacman.x, 
+        sample.pacman.y,
+        {
+          x: sample.pacman.x - this.pacman.gridX,
+          y: sample.pacman.y - this.pacman.gridY
+        },
+        currentTime
+      );
 
-        this.pacman.nextDirection = {
-          x: sample.pacman[0] - this.pacman.gridX,
-          y: sample.pacman[1] - this.pacman.gridY
-        };
-  
-        sample.ghosts.forEach(ghostData => {
-          const ghost = this.ghosts.find(ghost => Number(ghost.type) === ghostData[2]);
-          if (ghost) {
-            ghost.direction = {
-              x: ghostData[0] - ghost.gridX,
-              y: ghostData[1] - ghost.gridY,
-            };
+      sample.ghosts.forEach(ghostData => {
+        const ghost = this.ghosts.find(ghost => Number(ghost.type) === ghostData.type);
+        if (ghost) ghost.updateFromServerData(ghostData, currentTime);
+      });
+
+      if (currentTime - this.lastMoveTime >= this.MOVE_DELAY_MS) {
+        this.dots = this.dots.filter(dot => {
+          if (dot.gridX === this.pacman.gridX && dot.gridY === this.pacman.gridY) {
+            this.gameMap.setCell(dot.gridX, dot.gridY, CellType.Empty);
+            return false;
           }
+          return true;
         });
-  
+
         this.ngZone.run(() => {
-          this.currentScore = sample.score;
+            this.currentScore = sample.score;
         });
 
         this.lastMoveTime = currentTime;
         this.currentSampleIndex++;
+          
+        if (sample.game_over) this.gameService.gameOver();
+
+        if (this.dots.length === 0) {
+          this.gameMap = new GameMap(GAME_MAP);
+          this.initializeGameEntities();
+        }
       }
     }
-  
-    this.pacman.update(currentTime);
-    this.ghosts.forEach(ghost => ghost.update(currentTime, {
-      pacmanPosition: {x: this.pacman.gridX, y: this.pacman.gridY},
-      ghostPositions: this.ghosts.map(g => ({ x: g.gridX, y: g.gridY, type: g.type} as GhostPosition)),
-      gameMap: this.gameMap,
-    }));
-  
-    this.checkCollisions(currentTime);
+    
+    this.render(currentTime);
   }
 
   compareAgents(a: AgentInfo | null, b: AgentInfo | null): boolean {

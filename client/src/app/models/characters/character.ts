@@ -50,6 +50,22 @@ export abstract class Character {
         this.lastMoveTime = 0;
         this.isMoving = false;
     }
+
+    protected updateFrom(x: number, y: number, direction: Direction, currentTime: number): void {
+        if (this.gridX !== x || this.gridY !== y) {
+            this.lastMoveTime = currentTime;
+
+            this.nextDirection = direction;
+            this.direction = direction;
+
+            this.gridX = x;
+            this.gridY = y;
+        }
+
+        const progress = Math.min(1, (currentTime - this.lastMoveTime) / this.moveInterval);
+        this.displayX = x * this.cellSize - direction.x * (1 - progress) * this.cellSize;
+        this.displayY = y * this.cellSize - direction.y * (1 - progress) * this.cellSize;
+    }
   
     updatePosition(currentTime: number): boolean {
         if(this.isGameOver) {

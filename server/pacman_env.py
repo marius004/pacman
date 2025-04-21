@@ -344,8 +344,15 @@ class PacmanEnv(gym.Env):
     
     def _get_info(self) -> dict:
         return {
-            "pacman": [self.pacman.gridX, self.pacman.gridY],
-            "ghosts": [[ghost.gridX, ghost.gridY, ghost.type.value] for ghost in self.ghosts],
+            "pacman": {"x": self.pacman.gridX, "y": self.pacman.gridY},
+            "ghosts": [
+                {
+                    "x": ghost.gridX,
+                    "y": ghost.gridY,
+                    "type": ghost.type.value,
+                    "state": ghost.state,
+                } for ghost in self.ghosts
+            ],
             "timestamp": self.current_time,
             "game_over": self.game_over,
             "score": self.score,

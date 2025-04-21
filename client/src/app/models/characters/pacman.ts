@@ -1,3 +1,4 @@
+import { Direction } from '@models/interfaces';
 import {Character, MOVE_INTERVAL} from './character';
 import {GameMap} from '@models/map/game-map';
 
@@ -12,6 +13,18 @@ export class Pacman extends Character {
   get hasMoved(): boolean {
     return this.moved;
   }
+
+  updateFromServerData(x: number, y: number, direction: Direction, currentTime: number): void {
+    super.updateFrom(x, y, direction, currentTime);
+    
+    if (direction.x === 1) this.angle = 0;
+    else if (direction.x === -1) this.angle = Math.PI;
+    else if (direction.y === 1) this.angle = Math.PI/2;
+    else if (direction.y === -1) this.angle = -Math.PI/2;
+    
+    this.isMoving = true;
+    this.moved = true;
+  } 
 
   update(currentTime: number): void {
     if (!this.updatePosition(currentTime)) return;
@@ -72,5 +85,5 @@ export class Pacman extends Character {
     }
     
     return false;
-}
+  }
 }

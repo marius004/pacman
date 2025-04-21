@@ -1,6 +1,11 @@
 export interface EpisodeSample {
-    pacman: [number, number];
-    ghosts: [number, number, number][];
+    pacman: {x: number; y: number};
+    ghosts: {
+        x: number; 
+        y: number;
+        type: number;
+        state: number;
+    }[];
     
     game_over: boolean;
     
