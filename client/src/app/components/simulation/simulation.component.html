@@ -18,7 +18,7 @@
     <div class="status-bar">
       <div class="score">Score: {{ currentScore }}</div>
       <div class="checkpoint-status" *ngIf="checkpointsLoaded && selectedAgent">
-        Checkpoint: {{ currentCheckpoint + 1 }}/{{ selectedAgent.checkpoints }}
+        Checkpoint: {{ currentCheckpoint + 1 }} / {{ selectedAgent.checkpoints }}
       </div>
 
       <div class="navigation-buttons" *ngIf="checkpointsLoaded && selectedAgent">

@@ -66,12 +66,19 @@ export abstract class Character {
         this.displayX = x * this.cellSize - direction.x * (1 - progress) * this.cellSize;
         this.displayY = y * this.cellSize - direction.y * (1 - progress) * this.cellSize;
     }
-  
+    
     updatePosition(currentTime: number): boolean {
-        if(this.isGameOver) {
-            return false;
-        }
+        if(this.isGameOver) return false;
+
+        if (this.simulationMode) {
+            const progress = Math.min(1, (currentTime - this.lastMoveTime) / this.moveInterval);
         
+            this.displayX = this.gridX * this.cellSize - this.direction.x * (1 - progress) * this.cellSize;
+            this.displayY = this.gridY * this.cellSize - this.direction.y * (1 - progress) * this.cellSize;
+    
+            return progress >= 1;
+        }
+
         const targetX = this.gridX * this.cellSize;
         const targetY = this.gridY * this.cellSize;
     

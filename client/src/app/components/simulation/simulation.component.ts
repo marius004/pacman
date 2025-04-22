@@ -1,8 +1,8 @@
-import {GAME_MAP, GhostPosition} from '@models/interfaces';
-import {Subject, takeUntil, Observable} from 'rxjs';
+import {GAME_MAP, GhostInfo} from '@models/interfaces';
 import {GameMap} from '@models/map/game-map';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {Subject, takeUntil} from 'rxjs';
 import {Router} from '@angular/router';
 import {
   ElementRef, OnDestroy,
@@ -44,6 +44,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
   private gameOverSubscription: any;
 
   private ctx!: CanvasRenderingContext2D;
+  private lastFrameTime: number = 0;
   private animationFrame = 0;
   private cellSize = 0;
 
@@ -95,7 +96,8 @@ export class SimulationComponent implements OnInit, OnDestroy {
     this.destroyed$.next();
     this.stopGameLoop();
     
-    if (this.gameOverSubscription) this.gameOverSubscription.unsubscribe();
+    if (this.gameOverSubscription)
+      this.gameOverSubscription.unsubscribe();
   }
 
   startSimulation(): void {
@@ -116,9 +118,8 @@ export class SimulationComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: (agents: AgentInfo[]) => {
         this.agentList = agents;
-        if (this.agentList.length > 0) {
+        if (this.agentList.length > 0)
           this.selectedAgent = this.agentList[0];
-        }
       },
       error: (error) => {
         console.error('Error loading agents:', error);
@@ -245,58 +246,6 @@ export class SimulationComponent implements OnInit, OnDestroy {
     canvas.height = this.gameMap.height * this.cellSize;
   }
 
-  private checkCollisions(currentTime: number): void {
-    if (this.isTransitioning || this.gameService.isGameOver) return;
-    
-    this.checkDotCollision(currentTime);
-    this.checkGhostCollision(currentTime);
-    
-    if (this.currentSampleIndex >= this.episodeSamples.length && !this.isTransitioning)
-      this.gameService.gameOver();
-  }
-
-  private checkDotCollision(currentTime: number): void {
-    const pacmanPosition = {
-      x: Math.round(this.pacman.gridX),
-      y: Math.round(this.pacman.gridY)
-    };
-
-    this.dots = this.dots.filter(dot => {
-      if (dot.gridX === pacmanPosition.x && dot.gridY === pacmanPosition.y) {
-        if (dot.type === 0) {
-          this.gameService.eatDot();
-        } else {
-          this.gameService.eatPowerPellet();
-          this.ghosts.forEach(ghost => ghost.enterFrightenedState(currentTime));
-        }
-
-        this.gameMap.setCell(dot.gridX, dot.gridY, CellType.Empty);
-        return false;
-      }
-
-      return true;
-    });
-
-    if (this.dots.length === 0) {
-      this.gameMap = new GameMap(GAME_MAP);
-      this.initializeGameEntities();
-    }
-  }
-
-  private checkGhostCollision(currentTime: number): void {
-    this.ghosts.forEach(ghost => {
-      if (this.pacman.gridX === ghost.gridX && this.pacman.gridY == ghost.gridY) {
-        if (ghost.isFrightened()) {
-          this.gameService.eatGhost();
-          ghost.onEaten(currentTime);
-        } else {
-          this.stopGameLoop();
-          this.gameService.gameOver();
-        }
-      }
-    });
-  }
-
   private render(currentTime: number): void {
     if (!this.ctx) return;
     
@@ -325,8 +274,10 @@ export class SimulationComponent implements OnInit, OnDestroy {
     this.stopGameLoop();
     
     const gameLoop = (timestamp: number) => {
+      if (!this.lastFrameTime) this.lastFrameTime = timestamp;
+      this.lastFrameTime = timestamp;
+
       if (this.gameService.isGameOver && !this.isTransitioning) {
-        // Render one last frame to ensure game state is visible, but don't schedule another animation frame 
         this.render(timestamp);
         return;
       }
@@ -336,7 +287,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
 
       this.animationFrame = requestAnimationFrame(gameLoop);
     };
-  
+    
     this.animationFrame = requestAnimationFrame(gameLoop);
   }
 
@@ -350,25 +301,34 @@ export class SimulationComponent implements OnInit, OnDestroy {
   private updateGameState(currentTime: number): void {
     if (this.gameService.isGameOver && !this.isTransitioning) return;
     
+    this.pacman.updatePosition(currentTime);
+    this.ghosts.forEach(ghost => ghost.updatePosition(currentTime));
+    
     if (this.episodeSamples.length > 0 && this.currentSampleIndex < this.episodeSamples.length) {
       const sample = this.episodeSamples[this.currentSampleIndex];
-      
-      this.pacman.updateFromServerData(
-        sample.pacman.x, 
-        sample.pacman.y,
-        {
-          x: sample.pacman.x - this.pacman.gridX,
-          y: sample.pacman.y - this.pacman.gridY
-        },
-        currentTime
-      );
-
-      sample.ghosts.forEach(ghostData => {
-        const ghost = this.ghosts.find(ghost => Number(ghost.type) === ghostData.type);
-        if (ghost) ghost.updateFromServerData(ghostData, currentTime);
-      });
-
+        
       if (currentTime - this.lastMoveTime >= this.MOVE_DELAY_MS) {
+        this.pacman.updateFromServerData(
+          sample.pacman.x,
+          sample.pacman.y,
+          {
+            x: sample.pacman.x - this.pacman.gridX,
+            y: sample.pacman.y - this.pacman.gridY
+          },
+          currentTime
+        );
+
+        sample.ghosts.forEach(ghostData => {
+          const ghost = this.ghosts.find(ghost => Number(ghost.type) === ghostData.type);
+          if (ghost) {
+            ghost.update(currentTime, {
+              pacmanPosition: {x: sample.pacman.x, y: sample.pacman.y},
+              ghostsInfo: sample.ghosts as GhostInfo[],
+              gameMap: this.gameMap,
+            });
+          }
+        });
+
         this.dots = this.dots.filter(dot => {
           if (dot.gridX === this.pacman.gridX && dot.gridY === this.pacman.gridY) {
             this.gameMap.setCell(dot.gridX, dot.gridY, CellType.Empty);
@@ -377,36 +337,29 @@ export class SimulationComponent implements OnInit, OnDestroy {
           return true;
         });
 
-        this.ngZone.run(() => {
-            this.currentScore = sample.score;
-        });
-
         this.lastMoveTime = currentTime;
         this.currentSampleIndex++;
-          
-        if (sample.game_over) this.gameService.gameOver();
+
+        this.ngZone.run(() => {
+          this.currentScore = sample.score;
+        });
 
         if (this.dots.length === 0) {
           this.gameMap = new GameMap(GAME_MAP);
           this.initializeGameEntities();
+        } else if (sample.game_over) {
+          this.gameService.gameOver();
         }
       }
     }
-    
-    this.render(currentTime);
   }
 
   compareAgents(a: AgentInfo | null, b: AgentInfo | null): boolean {
-    return (
-      a?.model_name === b?.model_name &&
-      a?.checkpoints === b?.checkpoints &&
-      JSON.stringify(a?.description) === JSON.stringify(b?.description)
-    );
+    return a?.model_name === b?.model_name;
   }
 
   continueSimulation() {
     this.gameMap = new GameMap(GAME_MAP);
-
     this.initializeGameEntities();
     this.gameService.resetGame();
   }

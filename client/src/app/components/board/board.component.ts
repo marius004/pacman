@@ -1,5 +1,5 @@
 import {Subject, fromEvent, takeUntil, debounceTime, map, Observable} from 'rxjs';
-import {GAME_MAP, GhostPosition} from '@models/interfaces';
+import {GAME_MAP, GhostInfo} from '@models/interfaces';
 import {GameMap} from '@models/map/game-map';
 import {CommonModule} from '@angular/common';
 import {
@@ -236,7 +236,7 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
           currentTime, 
           {
             pacmanPosition: {x: this.pacman.gridX, y: this.pacman.gridY},
-            ghostPositions: this.ghosts.map(ghost => ({ x: ghost.gridX, y: ghost.gridY, type: ghost.type } as GhostPosition)),
+            ghostsInfo: this.ghosts.map(ghost => ({x: ghost.gridX, y: ghost.gridY, state: ghost.state, type: ghost.type} as GhostInfo)),
             gameMap: this.gameMap,
           }
         );

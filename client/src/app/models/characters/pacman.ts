@@ -1,5 +1,5 @@
-import { Direction } from '@models/interfaces';
 import {Character, MOVE_INTERVAL} from './character';
+import {Direction} from '@models/interfaces';
 import {GameMap} from '@models/map/game-map';
 
 export class Pacman extends Character {

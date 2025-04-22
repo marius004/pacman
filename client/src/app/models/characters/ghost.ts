@@ -38,32 +38,39 @@ type NodePath = {
 
 export abstract class Ghost extends Character {    
     protected scatterTarget: Direction;
+    protected previousState: GhostState;
 
-    protected state = GhostState.SCATTER;
     protected lastStateChange = 0;
     protected exitedRoom = false;
     protected cycleIndex = 0;
     
+    state = GhostState.SCATTER;
     readonly type: GhostType;
 
     constructor(type: GhostType, x: number, y: number, gameMap: GameMap, cellSize: number, simulationMode: boolean) {
         super(gameMap, x, y, cellSize, GHOST_BASE_SPEED, simulationMode);
+        this.type = type;
 
         this.scatterTarget = this.getScatterTarget(type, gameMap);
-        this.type = type;
-    }
-
-    updateFromServerData(data: {x: number, y: number, state: number}, currentTime: number): void {
-        const direction = {
-            x: data.x - this.gridX,
-            y: data.y - this.gridY
-        };
-        
-        super.updateFrom(data.x, data.y, direction, currentTime);
-        this.state = data.state;
+        this.previousState = GhostState.SCATTER;
     }
 
     update(currentTime: number, gameState: GameState): void {
+        if (this.simulationMode) {
+            const ghostData = gameState.ghostsInfo.find(g => g.type === this.type);
+            if (ghostData) {
+                super.updateFrom(
+                    ghostData.x, 
+                    ghostData.y, 
+                    {x: ghostData.x - this.gridX, y: ghostData.y - this.gridY}, 
+                    currentTime
+                );
+                this.state = ghostData.state;
+            }
+
+            return;
+        }
+
         if (!this.updatePosition(currentTime)) return;
 
         this.handleStateTransition(currentTime);
@@ -107,8 +114,11 @@ export abstract class Ghost extends Character {
     }
 
     enterFrightenedState(currentTime: number): void {
-        this.state = GhostState.FRIGHTENED;
-        this.lastStateChange = currentTime;
+        if (this.state !== GhostState.FRIGHTENED) {
+            this.previousState = this.state;
+            this.state = GhostState.FRIGHTENED;
+            this.lastStateChange = currentTime;
+        }
     }
 
     onEaten(currentTime: number): void {
@@ -118,7 +128,7 @@ export abstract class Ghost extends Character {
         this.gridX = GHOST_RESPAWN_POINT[this.type].x;
         this.gridY = GHOST_RESPAWN_POINT[this.type].y;
         
-        this.state = GhostState.SCATTER;
+        this.state = this.previousState;
         this.lastStateChange = currentTime;
         this.exitedRoom = true;
         
@@ -193,8 +203,8 @@ export abstract class Ghost extends Character {
         const validDirections = 
             POSSIBLE_DIRECTIONS.filter(({x, y}) => this.isValidPosition(this.gridX + x, this.gridY + y));
         
-        const directionIndex = this.getRandomInteger(0, validDirections.length);
-        return validDirections.length > 0 ? validDirections[directionIndex] : this.direction;
+        const directionIndex = Math.floor(Math.random() * validDirections.length);
+        return validDirections.length > 0 ? validDirections[directionIndex] : this.direction;    
     }
 
     protected abstract selectChaseDirection(gameState: GameState): Direction;
@@ -254,8 +264,7 @@ export abstract class Ghost extends Character {
         if (this.state === GhostState.FRIGHTENED) {
             if (sinceLastChange > 7000) {
                 this.lastStateChange = currentTime;
-                this.state = GhostState.CHASE;
-                this.cycleIndex = 0;
+                this.state = this.previousState;
             }
             return;
         }
@@ -304,12 +313,5 @@ export abstract class Ghost extends Character {
             y = py;
         }
         return this.getValidRandomDirection();
-    }
-
-    private getRandomInteger(a: number, b: number): number {
-        const seed = 31 * this.gridX + this.gridY;
-        
-        const pseudoRandom = Math.abs(Math.sin(seed) * 10000);
-        return a + Math.floor(pseudoRandom % (b - a));
     }
 }

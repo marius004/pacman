@@ -1,8 +1,9 @@
 import {GhostType} from './characters/ghost-type';
 import {GameMap} from './map/game-map';
 
-export interface GhostPosition {
+export interface GhostInfo {
     type: GhostType;
+    state: number;
 
     x: number;
     y: number;
@@ -21,7 +22,7 @@ export interface Dot {
 
 export interface GameState {
     pacmanPosition: Direction;
-    ghostPositions: GhostPosition[];
+    ghostsInfo: GhostInfo[];
     
     gameMap: GameMap;
 }
