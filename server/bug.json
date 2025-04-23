@@ -1,0 +1,7597 @@
+[
+    {
+        "pacman": {
+            "x": 9,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 8,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 0,
+        "game_over": false,
+        "score": 0
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 8,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 225,
+        "game_over": false,
+        "score": 10
+    },
+    {
+        "pacman": {
+            "x": 7,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 7,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 450,
+        "game_over": false,
+        "score": 20
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 7,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 675,
+        "game_over": false,
+        "score": 30
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 16
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 7,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 900,
+        "game_over": false,
+        "score": 40
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 7,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 1125,
+        "game_over": false,
+        "score": 50
+    },
+    {
+        "pacman": {
+            "x": 5,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 6,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 7,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 1350,
+        "game_over": false,
+        "score": 60
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 6,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 7,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 1575,
+        "game_over": false,
+        "score": 70
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 5,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 10,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 6,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 1800,
+        "game_over": false,
+        "score": 80
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 5,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 10,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 6,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 2025,
+        "game_over": false,
+        "score": 90
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 11,
+                "y": 5,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 7,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 11,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 5,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 2250,
+        "game_over": false,
+        "score": 100
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 16
+        },
+        "ghosts": [
+            {
+                "x": 11,
+                "y": 5,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 7,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 11,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 8,
+                "y": 5,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 2475,
+        "game_over": false,
+        "score": 110
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 5,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 7,
+                "y": 5,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 2700,
+        "game_over": false,
+        "score": 120
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 5,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 7,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 7,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 7,
+                "y": 5,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 2925,
+        "game_over": false,
+        "score": 130
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 4,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 8,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 8,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 5,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 3150,
+        "game_over": false,
+        "score": 140
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 4,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 8,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 8,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 5,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 3375,
+        "game_over": false,
+        "score": 150
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 3,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 9,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 9,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 4,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 3600,
+        "game_over": false,
+        "score": 160
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 3,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 9,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 9,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 4,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 3825,
+        "game_over": false,
+        "score": 170
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 12
+        },
+        "ghosts": [
+            {
+                "x": 13,
+                "y": 3,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 10,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 10,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 3,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 4050,
+        "game_over": false,
+        "score": 180
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 11
+        },
+        "ghosts": [
+            {
+                "x": 13,
+                "y": 3,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 10,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 10,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 3,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 4275,
+        "game_over": false,
+        "score": 190
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 10
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 3,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 11,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 11,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 5,
+                "y": 3,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 4500,
+        "game_over": false,
+        "score": 200
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 3,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 11,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 11,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 5,
+                "y": 3,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 4725,
+        "game_over": false,
+        "score": 210
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 2,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 12,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 12,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 4950,
+        "game_over": false,
+        "score": 220
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 2,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 12,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 12,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 5175,
+        "game_over": false,
+        "score": 230
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 13,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 13,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 5400,
+        "game_over": false,
+        "score": 240
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 8
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 6,
+                "y": 13,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 12,
+                "y": 13,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 5625,
+        "game_over": false,
+        "score": 250
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 15,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 5,
+                "y": 13,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 13,
+                "y": 13,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 5850,
+        "game_over": false,
+        "score": 260
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 15,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 5,
+                "y": 13,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 13,
+                "y": 13,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 6075,
+        "game_over": false,
+        "score": 270
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 16,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 13,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 6300,
+        "game_over": false,
+        "score": 280
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 16,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 13,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 6525,
+        "game_over": false,
+        "score": 290
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 8
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 14,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 14,
+                "y": 14,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 6750,
+        "game_over": false,
+        "score": 300
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 1,
+                "type": 0,
+                "state": 1
+            },
+            {
+                "x": 4,
+                "y": 14,
+                "type": 2,
+                "state": 1
+            },
+            {
+                "x": 14,
+                "y": 14,
+                "type": 3,
+                "state": 1
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "type": 1,
+                "state": 1
+            }
+        ],
+        "timestamp": 6975,
+        "game_over": false,
+        "score": 300
+    },
+    {
+        "pacman": {
+            "x": 5,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 2,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 1,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 7200,
+        "game_over": false,
+        "score": 310
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 2,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 1,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 7425,
+        "game_over": false,
+        "score": 320
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 10
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 3,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 13,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 7650,
+        "game_over": false,
+        "score": 330
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 11
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 3,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 13,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 7875,
+        "game_over": false,
+        "score": 340
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 12
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 4,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 8100,
+        "game_over": false,
+        "score": 350
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 4,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 8325,
+        "game_over": false,
+        "score": 360
+    },
+    {
+        "pacman": {
+            "x": 5,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 11,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 8550,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 11,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 8775,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 16,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 16,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 10,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 9000,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 16,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 16,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 10,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 9225,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 15,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 9,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 9450,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 15,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 9,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 9675,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 9900,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 10125,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 6,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 10350,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 6,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 5,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 10575,
+        "game_over": false,
+        "score": 370
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 6,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 10800,
+        "game_over": false,
+        "score": 380
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 6,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 11025,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 8,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 16,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 11250,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 8,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 16,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 11475,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 9,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 8,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 11700,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 9,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 17,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 8,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 11925,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 13,
+                "y": 9,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 16,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 12150,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 13,
+                "y": 9,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 16,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 12375,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 9,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 10,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 12600,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 9,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 10,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 12825,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 10,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 11,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 13050,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 10,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 11,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 13275,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 11,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 17,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 12,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 13500,
+        "game_over": false,
+        "score": 390
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 15,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 2,
+                "y": 17,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 12,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 13725,
+        "game_over": false,
+        "score": 440
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 11,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 3,
+                "y": 15,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 17,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 13,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 13950,
+        "game_over": false,
+        "score": 440
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 11,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 3,
+                "y": 15,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 17,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 13,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 14175,
+        "game_over": false,
+        "score": 440
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 16,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 14,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 14400,
+        "game_over": false,
+        "score": 640
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 16,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 14,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 14625,
+        "game_over": false,
+        "score": 640
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 14850,
+        "game_over": false,
+        "score": 1040
+    },
+    {
+        "pacman": {
+            "x": 5,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 15075,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 8,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 15300,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 16
+        },
+        "ghosts": [
+            {
+                "x": 8,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 15525,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 7,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 14,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 15750,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 7,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 14,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 15975,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 16
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 16200,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 11,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 16425,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 16
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 10,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 16650,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 17
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 10,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 16875,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 16
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 12,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 17100,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 12,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 17325,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 7,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 8,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 17550,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 8,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 17775,
+        "game_over": false,
+        "score": 1050
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 18000,
+        "game_over": false,
+        "score": 1060
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 6,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 18225,
+        "game_over": false,
+        "score": 1070
+    },
+    {
+        "pacman": {
+            "x": 7,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 7,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 11,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 18450,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 7,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 11,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 18675,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 7,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 8,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 18900,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 8,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 19125,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 12,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 8,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 19350,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 9,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 12,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 8,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 19575,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 19800,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 9,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 20025,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 6,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 14,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 10,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 20250,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 6,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 14,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 10,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 20475,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 9,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 5,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 11,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 20700,
+        "game_over": false,
+        "score": 1080
+    },
+    {
+        "pacman": {
+            "x": 10,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 10,
+                "y": 5,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 8,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 11,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 20925,
+        "game_over": false,
+        "score": 1090
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 11,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 12,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 21150,
+        "game_over": false,
+        "score": 1100
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 11,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 9,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 12,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 21375,
+        "game_over": false,
+        "score": 1110
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 10,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 13,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 21600,
+        "game_over": false,
+        "score": 1120
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 5,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 10,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 13,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 21825,
+        "game_over": false,
+        "score": 1130
+    },
+    {
+        "pacman": {
+            "x": 15,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 4,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 11,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 13,
+                "y": 13,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 22050,
+        "game_over": false,
+        "score": 1140
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 15
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 4,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 11,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 13,
+                "y": 13,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 22275,
+        "game_over": false,
+        "score": 1150
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 14
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 3,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 22500,
+        "game_over": false,
+        "score": 1160
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 12,
+                "y": 3,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 15,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 22725,
+        "game_over": false,
+        "score": 1170
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 13
+        },
+        "ghosts": [
+            {
+                "x": 13,
+                "y": 3,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 8,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 12,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 22950,
+        "game_over": false,
+        "score": 1220
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 12
+        },
+        "ghosts": [
+            {
+                "x": 13,
+                "y": 3,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 8,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 12,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 23175,
+        "game_over": false,
+        "score": 1230
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 11
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 3,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 23400,
+        "game_over": false,
+        "score": 1240
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 10
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 3,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 15,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 23625,
+        "game_over": false,
+        "score": 1250
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 9
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 4,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 13,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 14,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 23850,
+        "game_over": false,
+        "score": 1260
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 8
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 4,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 13,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 14,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 24075,
+        "game_over": false,
+        "score": 1270
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 5,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 24300,
+        "game_over": false,
+        "score": 1280
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 5,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 24525,
+        "game_over": false,
+        "score": 1290
+    },
+    {
+        "pacman": {
+            "x": 15,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 6,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 11,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 24750,
+        "game_over": false,
+        "score": 1300
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 7
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 6,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 11,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 24975,
+        "game_over": false,
+        "score": 1310
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 6
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 25200,
+        "game_over": false,
+        "score": 1320
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 5
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 12,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 25425,
+        "game_over": false,
+        "score": 1330
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 4
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 8,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 13,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 25650,
+        "game_over": false,
+        "score": 1340
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 8,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 13,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 25875,
+        "game_over": false,
+        "score": 1350
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 8,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 26100,
+        "game_over": false,
+        "score": 1360
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 14,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 8,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 26325,
+        "game_over": false,
+        "score": 1370
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 15,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 12,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 26550,
+        "game_over": false,
+        "score": 1370
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 15,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 12,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 26775,
+        "game_over": false,
+        "score": 1370
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 2
+        },
+        "ghosts": [
+            {
+                "x": 16,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 27000,
+        "game_over": false,
+        "score": 1380
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 16,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 27225,
+        "game_over": false,
+        "score": 1390
+    },
+    {
+        "pacman": {
+            "x": 15,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 27450,
+        "game_over": false,
+        "score": 1400
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 9,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 15,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 27675,
+        "game_over": false,
+        "score": 1410
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 8,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 27900,
+        "game_over": false,
+        "score": 1420
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 8,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 11,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 28125,
+        "game_over": false,
+        "score": 1420
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 12,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 28350,
+        "game_over": false,
+        "score": 1420
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 2
+        },
+        "ghosts": [
+            {
+                "x": 17,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 12,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 28575,
+        "game_over": false,
+        "score": 1470
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 28800,
+        "game_over": false,
+        "score": 1480
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 4
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 13,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 29025,
+        "game_over": false,
+        "score": 1490
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 14,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 29250,
+        "game_over": false,
+        "score": 1490
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 4
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 14,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 29475,
+        "game_over": false,
+        "score": 1490
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 15,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 9,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 29700,
+        "game_over": false,
+        "score": 1490
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 14,
+                "y": 15,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 16,
+                "y": 9,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 29925,
+        "game_over": false,
+        "score": 1500
+    },
+    {
+        "pacman": {
+            "x": 15,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 15,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 15,
+                "y": 9,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 30150,
+        "game_over": false,
+        "score": 1510
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 15,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 15,
+                "y": 9,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 30375,
+        "game_over": false,
+        "score": 1510
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 16,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 9,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 30600,
+        "game_over": false,
+        "score": 1510
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 16,
+                "y": 15,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 9,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 30825,
+        "game_over": false,
+        "score": 1510
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 16,
+                "y": 14,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 8,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 31050,
+        "game_over": false,
+        "score": 1520
+    },
+    {
+        "pacman": {
+            "x": 10,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 16,
+                "y": 14,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 8,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 31275,
+        "game_over": false,
+        "score": 1530
+    },
+    {
+        "pacman": {
+            "x": 9,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 16,
+                "y": 13,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 7,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 31500,
+        "game_over": false,
+        "score": 1540
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 16,
+                "y": 13,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 7,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 31725,
+        "game_over": false,
+        "score": 1550
+    },
+    {
+        "pacman": {
+            "x": 7,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 13,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 6,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 31950,
+        "game_over": false,
+        "score": 1560
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 13,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 6,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 32175,
+        "game_over": false,
+        "score": 1570
+    },
+    {
+        "pacman": {
+            "x": 5,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 12,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 32400,
+        "game_over": false,
+        "score": 1580
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 12,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 32625,
+        "game_over": false,
+        "score": 1590
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 2
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 4,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 32850,
+        "game_over": false,
+        "score": 1600
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 11,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 4,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 33075,
+        "game_over": false,
+        "score": 1610
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 2
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 33300,
+        "game_over": false,
+        "score": 1610
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 14,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 33525,
+        "game_over": false,
+        "score": 1610
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 2
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 13,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 33750,
+        "game_over": false,
+        "score": 1610
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 9,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 13,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 33975,
+        "game_over": false,
+        "score": 1610
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 8,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 34200,
+        "game_over": false,
+        "score": 1620
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 8,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 12,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 34425,
+        "game_over": false,
+        "score": 1630
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 1
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 17,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 11,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 34650,
+        "game_over": false,
+        "score": 1640
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 2
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 17,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 11,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 34875,
+        "game_over": false,
+        "score": 1690
+    },
+    {
+        "pacman": {
+            "x": 1,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 35100,
+        "game_over": false,
+        "score": 1700
+    },
+    {
+        "pacman": {
+            "x": 2,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 10,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 35325,
+        "game_over": false,
+        "score": 1710
+    },
+    {
+        "pacman": {
+            "x": 3,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 35550,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 4,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 9,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 35775,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 5,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 36000,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 36225,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 7,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 2,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 36450,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 2,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 36675,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 9,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 36900,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 10,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 8,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 37125,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 7,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 37350,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 7,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 37575,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 6,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 37800,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 6,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 38025,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 15,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 5,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 38250,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 5,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 38475,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 38700,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 38925,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 39150,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 39375,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 39600,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 39825,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 40050,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 1,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 40275,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 40500,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 40725,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 40950,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 17,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 41175,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 16,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 41400,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 15,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 41625,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 0
+            },
+            {
+                "x": 1,
+                "y": 5,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 0
+            }
+        ],
+        "timestamp": 41850,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 1,
+                "y": 5,
+                "type": 3,
+                "state": 0
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 42075,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 14,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 42300,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 2,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 42525,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 42750,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 3,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 42975,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 43200,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 5,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 43425,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 10,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 4,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 43650,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 4,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 43875,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 10,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 44100,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 44325,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 44550,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 44775,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 45000,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 13,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 45225,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 45450,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 5,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 45675,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 12,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 45900,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 11,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 46125,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 10,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 46350,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 9,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 46575,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 8,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 46800,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 7,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 1,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 47025,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 2,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 47250,
+        "game_over": false,
+        "score": 1720
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 4
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 2,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 47475,
+        "game_over": false,
+        "score": 1730
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 47700,
+        "game_over": false,
+        "score": 1730
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 4
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 8,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 47925,
+        "game_over": false,
+        "score": 1730
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 5
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 48150,
+        "game_over": false,
+        "score": 1740
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 4
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 7,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 48375,
+        "game_over": false,
+        "score": 1740
+    },
+    {
+        "pacman": {
+            "x": 6,
+            "y": 3
+        },
+        "ghosts": [
+            {
+                "x": 18,
+                "y": 7,
+                "type": 0,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 2,
+                "state": 2
+            },
+            {
+                "x": 6,
+                "y": 3,
+                "type": 3,
+                "state": 2
+            },
+            {
+                "x": 18,
+                "y": 7,
+                "type": 1,
+                "state": 2
+            }
+        ],
+        "timestamp": 48600,
+        "game_over": true,
+        "score": 1740
+    }
+]

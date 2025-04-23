@@ -20,6 +20,7 @@ class GhostState(Enum):
 
 class Ghost:
     def __init__(self, ghost_type: GhostType, x: int, y: int, game_map: GameMap):
+        self.previous_state = GhostState.SCATTER
         self.state = GhostState.SCATTER
         self.type = ghost_type
         
@@ -37,8 +38,11 @@ class Ghost:
         self.last_move_time = 0
         
         self.scatter_target = self._get_scatter_target()
-        self.exited_room = False
         self.cycle_index = 0
+        
+        self.respawn_start_time = 0
+        self.respawn_duration = 0
+        self.exited_room = False
     
     def update(self, current_time: int, game_state: dict):
         if self.is_game_over:
@@ -51,12 +55,14 @@ class Ghost:
         self._update_speed(current_time)
         self._check_door_exit()
         
-        self._determine_move_direction(game_state)
+        if self.exited_room and (current_time >= self.respawn_start_time + self.respawn_duration):
+            self.exited_room = False
         
+        self._determine_move_direction(game_state)
         self._move_ghost(current_time)
     
     def _check_door_exit(self):
-        if self.game_map.get_cell(self.gridX, self.gridY) == CellType.Door:
+        if not self.exited_room and self.game_map.get_cell(self.gridX, self.gridY) == CellType.Door:
             next_cell = self.game_map.get_cell(
                 self.gridX + self.direction.x, 
                 self.gridY + self.direction.y
@@ -115,12 +121,14 @@ class Ghost:
         scatter_chase_cycle = [7000, 20000, 7000, 20000, 5000, 20000, 5000, float('inf')]
         since_last_change = current_time - self.last_state_change
         
-        if self.state == GhostState.FRIGHTENED and since_last_change > 7000:
-            self.state = GhostState.CHASE
-            self.last_state_change = current_time
+        if self.state == GhostState.FRIGHTENED:
+            if since_last_change > 7000:
+                self.state = self.previous_state
+                self.last_state_change = current_time
             return
         
         if since_last_change > scatter_chase_cycle[self.cycle_index]:
+            self.previous_state = self.state
             self.state = GhostState.SCATTER if self.state == GhostState.CHASE else GhostState.CHASE
             self.cycle_index = min(self.cycle_index + 1, len(scatter_chase_cycle) - 1)
             self.last_state_change = current_time
@@ -203,21 +211,22 @@ class Ghost:
             if self._is_valid_position(self.gridX + direction.x, self.gridY + direction.y)
         ]
         
-        direction_index = self.get_random_integer(0, len(valid_directions))
-        return valid_directions[direction_index] if valid_directions else self.direction
-        # return np.random.choice(valid_directions) if valid_directions else self.direction
+        return np.random.choice(valid_directions) if valid_directions else self.direction
         
     def _select_chase_direction(self, game_state: dict) -> Direction:
         return self._get_valid_random_direction()
-    
+
     def enter_frightened_state(self, current_time: int):
-        self.state = GhostState.FRIGHTENED
-        self.last_state_change = current_time
+        if self.state != GhostState.FRIGHTENED:
+            self.previous_state = self.state
+            self.state = GhostState.FRIGHTENED
+            self.last_state_change = current_time
     
     def on_eaten(self, current_time: int):
+        self.direction = Direction(0, 0)
         self.last_state_change = current_time
         self.last_move_time = current_time
-        self.state = GhostState.SCATTER
+        self.state = self.previous_state
         
         respawn_points = {
             GhostType.BLINKY: (9, 9),
@@ -227,13 +236,16 @@ class Ghost:
         }
         
         self.gridX, self.gridY = respawn_points[self.type]
-        self.exited_room = False
+        self.exited_room = True
         
-    def get_random_integer(self, a: int, b: int) -> int:
-        seed = 31 * self.gridX + self.gridY
+        self.respawn_duration = {
+            GhostType.BLINKY: 1500,
+            GhostType.PINKY: 2000,
+            GhostType.INKY: 4000,
+            GhostType.CLYDE: 6000
+        }[self.type]
         
-        pseudo_random = abs(math.sin(seed) * 10000)
-        return 0 if b - a == 0 else a + int(pseudo_random % (b - a))
+        self.respawn_start_time = current_time
     
     def is_frightened(self) -> bool:
         return self.state == GhostState.FRIGHTENED

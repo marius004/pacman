@@ -270,6 +270,7 @@ export abstract class Ghost extends Character {
         }
     
         if (sinceLastChange > SCATTER_CHASE_CYCLE[this.cycleIndex]) {
+            this.previousState = this.state;
             this.state = this.state === GhostState.SCATTER ? GhostState.CHASE : GhostState.SCATTER;
             this.cycleIndex = Math.min(this.cycleIndex + 1, SCATTER_CHASE_CYCLE.length - 1);
             this.lastStateChange = currentTime;

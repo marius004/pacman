@@ -113,16 +113,14 @@ class PacmanEnv(gym.Env):
             self.pacman.next_direction = DIRECTION_MAP[action]
         
         self.current_time += 225
-        self.pacman.update(self.current_time)
-        
-        # Add new position to history
-        self.position_history.append((self.pacman.gridX, self.pacman.gridY))
         
         game_state = self._get_game_state()
         for ghost in self.ghosts:
             ghost.update(self.current_time, game_state)
+       
+        self.pacman.update(self.current_time)
+        self.position_history.append((self.pacman.gridX, self.pacman.gridY))
         
-        ghost_eaten = False
         self._check_dot_collision()
         ghost_collision, ghost_eaten = self._check_ghost_collision()
         
@@ -276,9 +274,7 @@ class PacmanEnv(gym.Env):
         self.dots = new_dots
         
     def _check_ghost_collision(self):
-        ghost_collision = False
-        ghost_eaten = False
-        
+        ghost_collision, ghost_eaten = False, False
         for ghost in self.ghosts:
             if (self.pacman.gridX == ghost.gridX and self.pacman.gridY == ghost.gridY):
                 if ghost.is_frightened():
