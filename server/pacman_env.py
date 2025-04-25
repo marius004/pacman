@@ -58,6 +58,9 @@ class PacmanEnv(gym.Env):
             dtype=np.float32
         )
         
+        self.prev_pacman_pos = (0, 0)
+        self.prev_ghost_positions = []
+        
         self.reset()
     
     def reset(self, **kwargs):
@@ -91,6 +94,9 @@ class PacmanEnv(gym.Env):
         self.position_history = deque(maxlen=8)  # Track the last 6 positions
         self.action_history = deque(maxlen=8)    # Track the last 6 actions
         
+        self.prev_pacman_pos = (self.pacman.gridX, self.pacman.gridY)
+        self.prev_ghost_positions = [(g.gridX, g.gridY) for g in self.ghosts]
+        
         return self._flatten_observation(self._get_obs()), self._get_info()
     
     def _flatten_observation(self, obs_dict):
@@ -99,6 +105,9 @@ class PacmanEnv(gym.Env):
     def step(self, action: int):
         if self.game_over:
             return self._flatten_observation(self._get_obs()), -250, True, False, self._get_info()
+        
+        self.prev_pacman_pos = (self.pacman.gridX, self.pacman.gridY)
+        self.prev_ghost_positions = [(g.gridX, g.gridY) for g in self.ghosts]
         
         old_score = self.score
         dots_before = len(self.dots)
@@ -275,8 +284,13 @@ class PacmanEnv(gym.Env):
         
     def _check_ghost_collision(self):
         ghost_collision, ghost_eaten = False, False
-        for ghost in self.ghosts:
-            if (self.pacman.gridX == ghost.gridX and self.pacman.gridY == ghost.gridY):
+        current_pacman_pos = (self.pacman.gridX, self.pacman.gridY)
+        
+        for i, ghost in enumerate(self.ghosts):
+            current_ghost_pos = (ghost.gridX, ghost.gridY)
+            prev_ghost_pos = self.prev_ghost_positions[i]
+            
+            if current_pacman_pos == current_ghost_pos:
                 if ghost.is_frightened():
                     self.score += self.ghost_streak
                     self.ghost_streak *= 2
@@ -287,6 +301,22 @@ class PacmanEnv(gym.Env):
                     self.pacman.set_game_over()
                     for g in self.ghosts:
                         g.set_game_over()
+                ghost_collision = True
+            
+            elif (current_pacman_pos == prev_ghost_pos 
+                and self.prev_pacman_pos == current_ghost_pos):
+                
+                if ghost.is_frightened():
+                    self.score += self.ghost_streak
+                    self.ghost_streak *= 2
+                    ghost.on_eaten(self.current_time)
+                    ghost_eaten = True
+                else:
+                    self.game_over = True
+                    self.pacman.set_game_over()
+                    for g in self.ghosts:
+                        g.set_game_over()
+                ghost_collision = True
         
         return ghost_collision, ghost_eaten
     
@@ -334,7 +364,7 @@ class PacmanEnv(gym.Env):
             if ghost.state == GhostState.CHASE and ghost_dist < 3:
                 reward -= (3 - ghost_dist) * 10
             elif ghost.state == GhostState.FRIGHTENED and ghost_dist < 8:
-                reward += (8 - ghost_dist) * 3
+                reward += (8 - ghost_dist) * 5
         
         return reward
     

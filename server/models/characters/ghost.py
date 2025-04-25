@@ -42,7 +42,7 @@ class Ghost:
         
         self.respawn_start_time = 0
         self.respawn_duration = 0
-        self.exited_room = False
+        self.door_locked = False
     
     def update(self, current_time: int, game_state: dict):
         if self.is_game_over:
@@ -55,19 +55,19 @@ class Ghost:
         self._update_speed(current_time)
         self._check_door_exit()
         
-        if self.exited_room and (current_time >= self.respawn_start_time + self.respawn_duration):
-            self.exited_room = False
+        if self.door_locked and (current_time >= self.respawn_start_time + self.respawn_duration):
+            self.door_locked = False
         
         self._determine_move_direction(game_state)
         self._move_ghost(current_time)
     
     def _check_door_exit(self):
-        if not self.exited_room and self.game_map.get_cell(self.gridX, self.gridY) == CellType.Door:
+        if not self.door_locked and self.game_map.get_cell(self.gridX, self.gridY) == CellType.Door:
             next_cell = self.game_map.get_cell(
                 self.gridX + self.direction.x, 
                 self.gridY + self.direction.y
             )
-            self.exited_room = next_cell != CellType.GhostCell
+            self.door_locked = next_cell != CellType.GhostCell
     
     def _determine_move_direction(self, game_state: dict):
         if self.state == GhostState.SCATTER:
@@ -106,7 +106,7 @@ class Ghost:
         return not is_opposite_direction
     
     def _can_pass_door(self) -> bool:
-        return not self.exited_room
+        return not self.door_locked
     
     def _move_ghost(self, current_time: int):
         newX = self.gridX + self.direction.x
@@ -208,10 +208,16 @@ class Ghost:
     def _get_valid_random_direction(self) -> Direction:
         valid_directions = [
             direction for direction in DIRECTION_MAP
-            if self._is_valid_position(self.gridX + direction.x, self.gridY + direction.y)
+            if self._is_valid_position(
+                self.gridX + direction.x, 
+                self.gridY + direction.y
+            )
         ]
         
-        return np.random.choice(valid_directions) if valid_directions else self.direction
+        if not valid_directions:
+            return Direction(0, 0)
+    
+        return np.random.choice(valid_directions) 
         
     def _select_chase_direction(self, game_state: dict) -> Direction:
         return self._get_valid_random_direction()
@@ -236,7 +242,7 @@ class Ghost:
         }
         
         self.gridX, self.gridY = respawn_points[self.type]
-        self.exited_room = True
+        self.door_locked = True
         
         self.respawn_duration = {
             GhostType.BLINKY: 1500,

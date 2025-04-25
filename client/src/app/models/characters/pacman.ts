@@ -80,7 +80,17 @@ export class Pacman extends Character {
     const target = [pointA, pointB].find(p => this.gridX === p.x && this.gridY === p.y);
     
     if (target) {
-      ({x: this.gridX, y: this.gridY} = target === pointA ? pointB : pointA);
+      let destination;
+    
+      if (target === pointA) {
+        destination = pointB;
+      } else {
+        destination = pointA;
+      }
+    
+      this.gridX = destination.x;
+      this.gridY = destination.y;
+    
       return true;
     }
     
