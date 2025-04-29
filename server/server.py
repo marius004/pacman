@@ -43,6 +43,13 @@ def list_trained_agents():
             if not checkpoint_files:
                 continue
 
+            files = []
+            if os.path.exists(os.path.join(model_path, "best_model.zip")):
+                files.append("best_model.zip")
+            if os.path.exists(os.path.join(model_path, f"{model}.zip")):
+                files.append(f"{model}.zip")
+            files.extend(checkpoint_files)
+
             description_path = os.path.join(model_path, "description.json")
             description = ""
             if os.path.exists(description_path):
@@ -58,7 +65,7 @@ def list_trained_agents():
 
             agents.append({
                 "model_name": f"{algo}/{model}",
-                "checkpoints": len(checkpoint_files) + 2,
+                "checkpoints": len(files),
                 "description": description,
                 "plots": num_plots,
             })
@@ -91,14 +98,10 @@ def get_agent_results(agent: str, model_name: str, checkpoint: int):
     best_model_path = os.path.join(model_base_path, "best_model.zip")
     if os.path.exists(best_model_path):
         files.append(best_model_path)
-    else:
-        files.append(None)
 
     model_zip_path = os.path.join(model_base_path, f"{model_name}.zip")
     if os.path.exists(model_zip_path):
         files.append(model_zip_path)
-    else:
-        files.append(None)
 
     checkpoints_dir = os.path.join(model_base_path, "checkpoints")
     if os.path.exists(checkpoints_dir):
