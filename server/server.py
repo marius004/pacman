@@ -9,6 +9,9 @@ import os
 import re
 
 app = FastAPI()
+
+CHECKPOINT_STEP = 20
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:4200"],
@@ -43,12 +46,15 @@ def list_trained_agents():
             if not checkpoint_files:
                 continue
 
-            files = []
+            special_files_count = 0
             if os.path.exists(os.path.join(model_path, "best_model.zip")):
-                files.append("best_model.zip")
+                special_files_count += 1
+                
             if os.path.exists(os.path.join(model_path, f"{model}.zip")):
-                files.append(f"{model}.zip")
-            files.extend(checkpoint_files)
+                special_files_count += 1
+            
+            checkpoint_count = (len(checkpoint_files) + CHECKPOINT_STEP - 1) // CHECKPOINT_STEP
+            total_files = special_files_count + checkpoint_count
 
             description_path = os.path.join(model_path, "description.json")
             description = ""
@@ -65,7 +71,7 @@ def list_trained_agents():
 
             agents.append({
                 "model_name": f"{algo}/{model}",
-                "checkpoints": len(files),
+                "checkpoints": total_files,
                 "description": description,
                 "plots": num_plots,
             })
@@ -93,15 +99,8 @@ def get_agent_results(agent: str, model_name: str, checkpoint: int):
     if not os.path.exists(model_base_path):
         raise HTTPException(status_code=404, detail=f"Model {model_name} not found")
 
-    files = []
-
-    best_model_path = os.path.join(model_base_path, "best_model.zip")
-    if os.path.exists(best_model_path):
-        files.append(best_model_path)
-
-    model_zip_path = os.path.join(model_base_path, f"{model_name}.zip")
-    if os.path.exists(model_zip_path):
-        files.append(model_zip_path)
+    special_files = []
+    checkpoint_files = []
 
     checkpoints_dir = os.path.join(model_base_path, "checkpoints")
     if os.path.exists(checkpoints_dir):
@@ -115,12 +114,27 @@ def get_agent_results(agent: str, model_name: str, checkpoint: int):
                 checkpoints.append((steps, os.path.join(checkpoints_dir, filename)))
 
         checkpoints.sort(key=lambda x: x[0])
-        files.extend([path for _, path in checkpoints])
+        checkpoint_files = [path for _, path in checkpoints]
 
-    if checkpoint >= len(files) or files[checkpoint] is None:
-        raise HTTPException(status_code=404, detail=f"Checkpoint {checkpoint} not found for model {model_name}")
+    model_zip_path = os.path.join(model_base_path, f"{model_name}.zip")
+    if os.path.exists(model_zip_path):
+        special_files.append(model_zip_path)
 
-    model_file_path = files[checkpoint]
+    best_model_path = os.path.join(model_base_path, "best_model.zip")
+    if os.path.exists(best_model_path):
+        special_files.append(best_model_path)
+
+    checkpoint_count = (len(checkpoint_files) + CHECKPOINT_STEP - 1) // CHECKPOINT_STEP
+    if checkpoint < checkpoint_count:
+        checkpoint_index = checkpoint * CHECKPOINT_STEP
+        if checkpoint_index >= len(checkpoint_files):
+            checkpoint_index = len(checkpoint_files) - 1
+
+        model_file_path = checkpoint_files[checkpoint_index]
+    else:
+        special_index = checkpoint - checkpoint_count
+        model_file_path = special_files[special_index]
+    
     player = PacmanPlayer(model_file_path)
     return player.play()
 
