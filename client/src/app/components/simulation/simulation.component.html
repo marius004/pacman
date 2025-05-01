@@ -22,8 +22,16 @@
       </div>
 
       <div class="navigation-buttons" *ngIf="checkpointsLoaded && selectedAgent">
-        <button (click)="loadPreviousCheckpoint()" [disabled]="currentCheckpoint === 0"><b>←</b> Previous</button>
-        <button (click)="loadNextCheckpoint()" [disabled]="currentCheckpoint >= selectedAgent.checkpoints - 1">Next <b>→</b></button>
+        <button 
+          (click)="loadPreviousCheckpoint()"
+          [disabled]="isLoading || currentCheckpoint === 0">
+          <b>←</b> Previous
+        </button>
+        <button 
+          (click)="loadNextCheckpoint()"
+          [disabled]="isLoading || currentCheckpoint >= selectedAgent.checkpoints - 1">
+          Next <b>→</b>
+        </button>
       </div>
     </div>
     

@@ -53,13 +53,15 @@ export class SimulationComponent implements OnInit, OnDestroy {
 
   private readonly MOVE_DELAY_MS = 225;
   private isTransitioning = false;
-  gameStarted: boolean = false;
   private lastMoveTime = 0;
-
+  
   ghosts: Ghost[] = [];
   dots: Dot[] = [];
   pacman!: Pacman;
-
+  
+  gameStarted: boolean = false;
+  isLoading: boolean = false;
+  
   currentCheckpoint: number = 0;
   currentPlotIndex: number = 0;
   currentScore: number = 0;
@@ -175,6 +177,8 @@ export class SimulationComponent implements OnInit, OnDestroy {
   private loadCheckpointData(checkpoint: number): void {
     if (!this.selectedAgent) return;
     
+    this.isLoading = true;
+
     this.rlAgentService.getEpisode(this.selectedAgent.model_name, checkpoint).pipe(
       takeUntil(this.destroyed$)
     ).subscribe({
@@ -184,6 +188,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
         
         this.ngZone.runOutsideAngular(() => {
           setTimeout(() => {
+            this.isLoading = false;
             this.lastMoveTime = performance.now();
             this.startGameLoop();
           }, 500);
@@ -192,6 +197,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error(`Error loading checkpoint ${checkpoint}:`, error);
         this.isTransitioning = false;
+        this.isLoading = false;
       }
     });
   }
